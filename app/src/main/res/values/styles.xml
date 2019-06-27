@@ -1,0 +1,38 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorNegro</item>
+        <item name="colorPrimaryDark">@color/colorNegro</item>
+        <item name="colorOnPrimary">@color/colorAmarillo</item>
+
+        <item name="colorSecondary">@color/colorAmarillo</item>
+        <item name="colorAccent">@color/colorAmarillo</item>
+        
+        <item name="android:colorBackground">@color/colorFondo</item>
+
+        <!--Se define las transicion de entrada y salida para las pantallas-->
+        <item name="android:windowEnterTransition">@android:transition/fade</item>
+        <item name="android:windowExitTransition">@android:transition/fade</item>
+
+    </style>
+
+    <!-- Estilo de la Toolbar-->
+    <style name="AppTheme.toolbarStyle" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:background">@color/colorNegro</item>
+        <item name="colorControlNormal">@color/colorAmarillo</item>
+    </style>
+
+    <style name="AppTheme.toolBarTextStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.toolBarPopupTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/colorAmarillo</item>
+        <item name="android:popupBackground">@color/colorFondo</item>
+    </style>
+    <!-- Fin Estilo de la Toolbar-->
+
+
+</resources>

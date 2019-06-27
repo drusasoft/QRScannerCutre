@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">QRScanner</string>
+
+    <!-- Pantalla Info -->
+    <string name="tit_pantalla_info">Info</string>
+    <!-- Fin Pantalla Info-->
+</resources>

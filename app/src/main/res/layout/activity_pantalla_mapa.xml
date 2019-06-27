@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutParentPantallaMapa"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="invisible">
+
+    <fragment
+        android:id="@+id/mapaQR"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomBarMapa"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:theme="@style/AppTheme.toolbarStyle"
+        android:visibility="invisible"
+        app:menu="@menu/menu_mapa"
+        app:backgroundTint="@color/colorNegro"
+        app:titleTextAppearance="@style/AppTheme.toolBarTextStyle"
+        app:popupTheme="@style/AppTheme.toolBarPopupTheme"
+        app:fabAlignmentMode="end"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="6dp"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingBtnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:rippleColor="@color/colorNegro"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        app:layout_anchor="@id/bottomBarMapa"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

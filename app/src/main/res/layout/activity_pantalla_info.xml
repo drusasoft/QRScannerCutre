@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarInfo"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme.toolbarStyle"
+        android:layout_alignParentTop="true"
+        app:popupTheme="@style/AppTheme.toolBarPopupTheme"
+        app:titleTextColor="@color/colorAmarillo"
+        app:titleTextAppearance="@style/AppTheme.toolBarTextStyle"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@drawable/info_icon"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:transitionName="imgInfo"/>
+
+    <LinearLayout
+        android:id="@+id/layout_contenido_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbarInfo"
+        android:orientation="vertical"
+        android:background="@drawable/frame0"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:textColor="@color/colorAmarillo"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:text="Realizado por Angel Acuña \n drusa.soft@gmail.com"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

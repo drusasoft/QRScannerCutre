@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorNegro">#000000</color>
+    <color name="colorFondo">#37474F</color>
+    <color name="colorAmarillo">#FBC02D</color>
+    <color name="colorAmarilloClaro">#FDD835</color>
+    <color name="transparente">#00ffffff</color>
+
+</resources>

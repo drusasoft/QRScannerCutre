@@ -17,4 +17,6 @@ public class QRScannerCutre extends Application
     public DataManagerDetectorCodigos getDataManagerDetectorCodigos() {
         return dataManagerDetectorCodigos;
     }
+
+
 }

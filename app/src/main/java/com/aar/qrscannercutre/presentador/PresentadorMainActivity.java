@@ -1,6 +1,5 @@
 package com.aar.qrscannercutre.presentador;
 
-import android.util.Log;
 import com.aar.qrscannercutre.iu.VistaBase;
 import com.aar.qrscannercutre.iu.VistaMainActivity;
 import com.aar.qrscannercutre.modelo.DataManagerDetectorCodigos;
@@ -28,38 +27,31 @@ public class PresentadorMainActivity implements PresentadorMVPMainActivity
     }
 
 
+
     @Override
+    //Se llama al metodo de la clase que compone el Modelo y en el se libera al objeto de la clase Detector.Processor
     public void liberarDetectorCodigos()
     {
         dataManagerDetectorCodigos.liberarDetectorCodigos();
     }
 
 
+
     @Override
+    //Metodo que devuelve un Objeto de la clase Detector.Processor que es la que realiza el proceso de deteccion
     public DetectorCodigos getDetectorCodigos()
     {
         return dataManagerDetectorCodigos.getDetectorCodigos();
     }
 
 
+
     @Override
     //En funcion del tipo de Codigo Capturado se muestra el dialogo correspondiente
     public void gestionarCapturaCodigo(Barcode barCode)
     {
-
-        vista.mostrarCapturaOK();
-
-        switch (barCode.valueFormat)
-        {
-
-            case Barcode.URL:   vista.lanzarURL(barCode);
-                                break;
-
-            case Barcode.PHONE: vista.lanzarLlamada(barCode);
-                                break;
-
-        }
-
+        vista.mostrarCapturaOK(barCode);
     }
+
 
 }

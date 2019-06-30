@@ -42,7 +42,7 @@
             android:textColor="@color/colorAmarillo"
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:text="Realizado por Angel Acuña \n drusa.soft@gmail.com"/>
+            android:text="@string/txtPantallaInfo"/>
 
 
     </LinearLayout>

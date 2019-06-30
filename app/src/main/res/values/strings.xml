@@ -1,7 +1,59 @@
 <resources>
     <string name="app_name">QRScanner</string>
 
+
+    <!-- Pantalla main-->
+    <string name="titDialogWeb">WEB</string>
+    <string name="txtDialogWeb">Do you want to access the url,</string>
+    <string name="txtPermiso">In order to use the App, you must allow to use the camera</string>
+    <string name="btnSi">Yes</string>
+    <string name="btnNo">No</string>
+    <string name="txtErrorWeb">Error, URL formatted incorrectly</string>
+    <string name="titDialogLlamada">CALL</string>
+    <string name="txtDialogLlamada">Do you want to call</string>
+    <string name="titDialogMapa">MAP</string>
+    <string name="txtDialogMapa">Do you want to see the location on the map?\n\n</string>
+    <string name="txtLatitud">Latitude:</string>
+    <string name="txtLongitud">\nLongitude</string>
+    <string name="titDialogSms">SMS</string>
+    <string name="txtDialogSms">Do you want to send the SMS message?</string>
+    <string name="txtDialogSms2">\nPhone:</string>
+    <string name="titDialogEmail">EMAIL</string>
+    <string name="txtDialogEmail">Do you want to send the Email?</string>
+    <string name="titDialogAgenda">CONTACT</string>
+    <string name="txtDialogAgenda">Do you want to add contact information?</string>
+    <string name="txtEscanear">Scan</string>
+    <string name="txtTipoCodigoQR">QR Code: --</string>
+    <string name="txtTipoCodigoQR_1">QR Code: Url</string>
+    <string name="txtTipoCodigoQR_2">QR Code: Call</string>
+    <string name="txtTipoCodigoQR_3">QR Code: Map</string>
+    <string name="txtTipoCodigoQR_4">QR Code: Sms</string>
+    <string name="txtTipoCodigoQR_5">QR Code: Email</string>
+    <string name="txtTipoCodigoQR_6">QR Code: Contact</string>
+    <!-- Fin Pantalla Main-->
+
+
     <!-- Pantalla Info -->
     <string name="tit_pantalla_info">Info</string>
+    <string name="txtPantallaInfo">Made by Angel Acuña \n drusa.soft@gmail.com</string>
+    <string name="txtMenuInfo">Privacy Policies</string>
     <!-- Fin Pantalla Info-->
+
+
+    <!--Pantalla Mapa-->
+    <string name="txtDireccion">Address</string>
+    <string name="txtErrorMapa_1">The address could not be obtained</string>
+    <string name="txtErrorMapa_2">To be able to show the location correctly, it is necessary to connect to the Internet</string>
+    <string name="txtMenuMapa_1">Normal View</string>
+    <string name="txtMenuMapa_2">Hybrid View</string>
+    <string name="txtMenuMapa_3">Satellite View</string>
+    <string name="txtMenuMapa_4">Terrain View</string>
+    <!-- Fin Pantalla Mapa-->
+
+
+    <!-- Fragment QRScanner-->
+    <string name="txtErrorFragmentQRScanner">Error, the capture could not be made</string>
+    <!-- Fin Fragment QRScanner-->
+
+
 </resources>

@@ -1,7 +1,9 @@
 package com.aar.qrscannercutre.iu;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
@@ -10,13 +12,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.LinearLayout;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.aar.qrscannercutre.R;
+import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+
 
 public class PantallaInfo extends AppCompatActivity
 {
@@ -26,6 +30,8 @@ public class PantallaInfo extends AppCompatActivity
 
     private AnimationDrawable animacionFondo;
     private boolean animacionFondoIniciada = false;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -43,6 +49,7 @@ public class PantallaInfo extends AppCompatActivity
     }
 
 
+
     @Override
     protected void onPause()
     {
@@ -52,6 +59,7 @@ public class PantallaInfo extends AppCompatActivity
         if(animacionFondoIniciada && animacionFondo.isRunning())
             animacionFondo.stop();
     }
+
 
 
     @Override
@@ -64,12 +72,16 @@ public class PantallaInfo extends AppCompatActivity
             animacionFondo.start();
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_pantalla_info, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -80,12 +92,32 @@ public class PantallaInfo extends AppCompatActivity
             case android.R.id.home: onBackPressed();
                                     return true;
 
-            case R.id.menu_politicas:
-                                    return true;
+            /*case R.id.menu_politicas: //Se lanaza la url donde se muestran la politicas de privacidad de la App
+                                      verPoliticasPrivacidad();
+                                      return true;*/
         }
 
         return false;
     }
+
+
+
+    private void verPoliticasPrivacidad()
+    {
+        Intent intent;
+
+       if(Locale.getDefault().getLanguage().equals("es"))
+       {
+           intent = new Intent(Intent.ACTION_VIEW, Uri.parse(""));
+       }else
+       {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(""));
+       }
+
+       startActivity(intent);
+
+    }
+
 
 
     private void setupEnterTransition()
@@ -127,6 +159,7 @@ public class PantallaInfo extends AppCompatActivity
     }
 
 
+
     //Se inicia la animacion (AnimationDrawable) de la imagen de fondo de la pantalla principal
     private void animacion_fondo() {
 
@@ -143,6 +176,7 @@ public class PantallaInfo extends AppCompatActivity
 
         });
     }
+
 
 
     private void efecto_mostrar_circular(View view)
@@ -164,4 +198,5 @@ public class PantallaInfo extends AppCompatActivity
         anim.start();
 
     }
+
 }

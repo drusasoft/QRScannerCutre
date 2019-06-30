@@ -21,6 +21,20 @@
                             android:layout_height="match_parent"
                             android:layout_margin="15dp"/>
 
+                        <ImageView
+                            android:id="@+id/imageViewTransparente"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:layout_margin="15dp"/>
+
+                        <ImageView
+                            android:id="@+id/imagenCapturada"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="15dp"
+                            android:visibility="invisible"/>
+
                 </FrameLayout>
 
         </androidx.cardview.widget.CardView>

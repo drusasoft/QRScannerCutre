@@ -13,13 +13,14 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.aar.qrscannercutre.QRScannerCutre;
 import com.aar.qrscannercutre.R;
@@ -29,6 +30,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -44,6 +46,17 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     @BindView(R.id.btnScanner) Button btnScanner;
     @BindView(R.id.imgInfo) ImageView imgInfo;
     @BindView(R.id.imgLuzScanner) ImageView imgLuzScanner;
+    @BindView(R.id.textViewTipoCodigoQR) TextView textViewTipoCodigoQR;
+
+    @BindString(R.string.txtDialogWeb) String txtDialogWeb;
+    @BindString(R.string.txtDialogLlamada) String txtDialogLlamada;
+    @BindString(R.string.txtDialogMapa) String txtDialogMapa1;
+    @BindString(R.string.txtLatitud) String txtLatitud;
+    @BindString(R.string.txtLongitud) String txtLongitud;
+    @BindString(R.string.txtDialogSms) String txtDialogSms;
+    @BindString(R.string.txtDialogSms2) String txtDialogSms2;
+    @BindString(R.string.txtDialogEmail) String txtDialogEmail;
+    @BindString(R.string.txtDialogAgenda) String txtDialogAgenda;
 
     private FragmentMainActivity fragmentMainActivity;
     private FragmentQRScanner fragmentQRScanner;
@@ -92,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
     }
 
+
+
     @Override
     protected void onPause()
     {
@@ -101,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
         if(animacionFondoIniciada && animacionFondo.isRunning())
             animacionFondo.stop();
     }
+
+
 
     @Override
     protected void onResume()
@@ -112,48 +129,26 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
             animacionFondo.start();
     }
 
+
+
     @Override
+    //Metodo que se ejecuta a raiz de la solicitud de permiso al usuari para usar la camara, si el usuario no ha dado permiso para usar la camara
+    //se muestra un mensaje incandole que es necesario dicho permiso para usar la App
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
     {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if(requestCode == PERMISSIONS_REQUEST_CAMERA && grantResults[0] == PackageManager.PERMISSION_DENIED)
         {
-            Toast.makeText(this, "Para poder usar la App debes permitir usar la camara", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.txtPermiso, Toast.LENGTH_LONG).show();
         }
     }
 
-    /*@Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-
-        if(keyCode == KeyEvent.KEYCODE_BACK)
-        {
-            if(getSupportFragmentManager().findFragmentByTag("fragment_QRScanner") != null)
-            {
-                cargarFragment();
-                floatingBtnScanner.setTag("irMainActivity");
-                floatingBtnScanner.hide();
-                floatingBtnScanner.setImageResource(android.R.drawable.ic_menu_revert);
-                floatingBtnScanner.show();
-
-            }else
-            {
-                finish();
-            }
-
-            return true;
-        }
-
-        return false;
-    }*/
 
 
     @OnClick(R.id.floatingBtnShowScanner)
     public void pushBtnScanner(View view)
     {
-
-        Log.e("tag", view.getTag().toString());
 
         if(comprobarPermisoCamara())
         {
@@ -193,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     public void scanearCodigo()
     {
         imgLuzScanner.setImageResource(R.drawable.led_black);
+        textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR);
         fragmentQRScanner.iniciarCaptura();
     }
 
@@ -200,28 +196,25 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     @OnClick(R.id.imgInfo)
     public void irPntallaInfo()
     {
-        /*Intent intent = new Intent(this, PantallaInfo.class);
+        Intent intent = new Intent(this, PantallaInfo.class);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, imgInfo, "imgInfo");
-        startActivity(intent, options.toBundle());*/
-
-        Intent intent = new Intent(this, PantallaMapa.class);
-        startActivity(intent);
+        startActivity(intent, options.toBundle());
     }
 
 
     //**********************************************************************************************
         //Metodos llamados desde el FragmentQRScanner
     //**********************************************************************************************
-    //Metodo llamado desde el FragmentQRScanner para mostrar el boton cuando el surfaceview esta disponible
+    //Metodo llamado desde el FragmentQRScanner para mostrar el boton de escanear cuando el surfaceview esta disponible
     public void mostrarBtnScanner()
     {
         btnScanner.setVisibility(View.VISIBLE);
     }
 
-    //Metoo llamado desde el FragmentQRScanner para ocultar el boton
+
+    //Metodo llamado desde el FragmentQRScanner para ocultar el boton de escanear
     public void ocultarBtnScanner()
     {
-        Log.e("Main Activity", "ocultarBtnScanner");
         btnScanner.setVisibility(View.INVISIBLE);
         imgLuzScanner.setImageResource(R.drawable.led_red);
     }
@@ -233,46 +226,43 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     //**********************************************************************************************
         //Metodos que llaman al Presentador y que son llamados desde el Presentador
     //**********************************************************************************************
+
+    //Se llama al metodo del Presntador que devuelve un objeto de la Clase Detector (que es la clase que escanea los CodigosQR)
     public DetectorCodigos getDetectorCodigos()
     {
         return presentadorMainActivity.getDetectorCodigos();
     }
 
 
+    //Se llama al metodo del Presentador que se encar de liberar el objeto de la Clase Detector
     public void liberarDetectorCodigos()
     {
         presentadorMainActivity.liberarDetectorCodigos();
     }
 
 
-    @Override
-    //Se llama al metodo del FragmentQRScanner que libera los recusrsos de la Camara...etc
-    public void liberarRecursosCamara()
-    {
-        fragmentQRScanner.liberarRecursos();
-    }
-
 
     @Override
     //Se cambia la interfaz de usuario para indicar que el codigo se ha capturado correctamente
-    public void mostrarCapturaOK()
+    public void mostrarCapturaOK(Barcode barCode)
     {
 
-        //Para poder mostrar de nuevo el boton de escanea es necesario hacero asi ya que el origen de la llamada es este metodo
-        //se produce desde la Clase DetectorCodigos y los objetos de esa clase se ejecutan en un hilo a parte (Por Defecto)
+        //Para poder mostrar de nuevo el boton de escanea es necesario hacerlo asi, ya que el origen de la llamada a este metodo
+        //se produce desde la Clase DetectorCodigos (Detector) y los objetos de esa clase se ejecutan en un hilo a parte (Por Defecto)
         //Y android no deja modifcar los views desde un hilo distinto al prinicpal de la App
         this.runOnUiThread(new Runnable() {
             @Override
             public void run()
             {
-                Log.e("Main Activity", "mostrarDialogoResultadoQR");
                 imgLuzScanner.setImageResource(R.drawable.led_green);
                 btnScanner.setVisibility(View.VISIBLE);
-                fragmentQRScanner.liberarRecursos();
+                fragmentQRScanner.tomarFoto(barCode);
             }
         });
 
+
     }
+
 
 
     @Override
@@ -288,12 +278,12 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
             url = "http://"+barCode.rawValue;
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
-                .setTitle("WEB")
-                .setMessage("¿Quieres acceder a la dirección "+url+"?")
-                .setNegativeButton("No", null);
+                .setTitle(R.string.titDialogWeb)
+                .setMessage(txtDialogWeb+", "+url+" ?")
+                .setNegativeButton(R.string.btnNo, null);
 
         String finalUrl = url;
-        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.btnSi, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
@@ -308,7 +298,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
                 }catch(Exception exception)
                 {
-                    Toast.makeText(getApplicationContext(), "Error, URL con formato incorrecto", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.txtErrorWeb, Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -319,6 +309,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
             @Override
             public void run()
             {
+                textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR_1);
                 builder.create().show();
             }
         });
@@ -329,36 +320,258 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
     @Override
     //Se le pregunta al usuario si quiere acceder a la URL escaneada
-    public void lanzarLlamada(Barcode barcode)
+    public void lanzarLlamada(Barcode barCode)
     {
+
         //Se obtiene el numero de telefono del codigo
-        String numTelefono = barcode.phone.number;
+        String numTelefono = barCode.phone.number;
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
-                .setTitle("LLAMADA")
-                .setMessage("¿Quieres llamar al telefono "+numTelefono+"?")
-                .setNegativeButton("No", null);
+                .setTitle(R.string.titDialogLlamada)
+                .setMessage(txtDialogLlamada+", "+numTelefono+"?")
+                .setNegativeButton(R.string.btnNo, null);
 
-        builder.setPositiveButton("Si", new DialogInterface.OnClickListener()
+        builder.setPositiveButton(R.string.btnSi, new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                dialog.dismiss();
 
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:"+numTelefono));
                 startActivity(intent);
+
+                dialog.dismiss();
             }
 
         });
 
         this.runOnUiThread(new Runnable() {
             @Override
-            public void run() {
+            public void run()
+            {
+                textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR_2);
                 builder.create().show();
             }
         });
+
+    }
+
+
+    @Override
+    //Se le pregunta al usuario si quiere ver la localizacion escaneada en el mapa
+    public void lanzarMapa(Barcode barCode)
+    {
+
+        //Se obtiene las coordenadas del mapa
+        Barcode.GeoPoint geoPoint = barCode.geoPoint;
+        double lat = geoPoint.lat;
+        double lng = geoPoint.lng;
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
+                .setTitle(R.string.titDialogMapa)
+                .setMessage(txtDialogMapa1+txtLatitud+" "+lat+txtLongitud+" "+lng)
+                .setNegativeButton(R.string.btnNo, null);
+
+        builder.setPositiveButton(R.string.btnSi, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+
+                Intent intent = new Intent(getApplicationContext(), PantallaMapa.class);
+                intent.putExtra("lat",lat);
+                intent.putExtra("lng", lng);
+                startActivity(intent);
+
+                dialog.dismiss();
+
+            }
+        });
+
+
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR_3);
+                builder.create().show();
+            }
+        });
+
+    }
+
+
+
+    @Override
+    //Se le pregunta al usuario si quiere enviar el SMS escaneado
+    public void lanzarSms(Barcode barCode)
+    {
+
+        //Se obtienen los datos del SMS
+        Barcode.Sms sms = barCode.sms;
+        String telefono = sms.phoneNumber;
+        String mensaje = sms.message;
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this,  R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
+                .setTitle(R.string.titDialogSms)
+                .setMessage(txtDialogSms+txtDialogSms2+" "+telefono)
+                .setNegativeButton(R.string.btnNo, null);
+
+        builder.setPositiveButton(R.string.btnSi, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //Se lanza la aplicacion del telefono que se encarga del enivo de SMS
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.putExtra("address",telefono);
+                intent.putExtra("sms_body",mensaje);
+                intent.setType("vnd.android-dir/mms-sms");
+                startActivity(intent);
+
+                dialog.dismiss();
+            }
+        });
+
+
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR_4);
+                builder.create().show();
+            }
+        });
+    }
+
+
+
+    @Override
+    //Se le pregunta al usuario si quiere enviar el Email escaneado
+    public void lanzarEmail(Barcode barCode)
+    {
+
+        //Se obtienen los datos del Email
+        Barcode.Email emailBarcode = barCode.email;
+        String direccion = emailBarcode.address;
+        String asunto = emailBarcode.subject;
+        String mensaje = emailBarcode.body;
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
+                .setTitle(R.string.titDialogEmail)
+                .setMessage(txtDialogEmail)
+                .setNegativeButton(R.string.btnNo, null);
+
+        builder.setPositiveButton(R.string.btnSi, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                String[] direcciones = new String[]{direccion};
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setData(Uri.parse("mailto:"));
+                intent.putExtra(Intent.EXTRA_EMAIL, direcciones);
+                intent.putExtra(Intent.EXTRA_SUBJECT, asunto);
+                intent.putExtra(Intent.EXTRA_TEXT, mensaje);
+                intent.setType("message/rfc822");
+                startActivity(Intent.createChooser(intent, "Email"));//Se lanza la aplicacion de correo
+
+                dialog.dismiss();
+            }
+
+        });
+
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR_5);
+                builder.create().show();
+            }
+        });
+
+    }
+
+
+
+    @Override
+    //Se le pregunta al usuario si quiere guardar el contacto escaneado en la Agenda de su telefono
+    public void lanzarAgenda(Barcode barCode)
+    {
+
+        String nombre = "";
+        String telefono = "";
+
+        //Se obtienen los datos del contacto
+        Barcode.ContactInfo contactInfo = barCode.contactInfo;
+        Barcode.PersonName personName = contactInfo.name;
+        Barcode.Phone[] telefonos = contactInfo.phones;
+        Barcode.Email[] emails = contactInfo.emails;
+
+        if(personName != null)
+            nombre = personName.first;
+
+        if(telefonos != null && telefonos.length>0)
+            telefono = telefonos[0].number;
+
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
+                .setTitle(R.string.titDialogAgenda)
+                .setMessage(txtDialogAgenda)
+                .setNegativeButton(R.string.btnNo, null);
+
+        String finalNombre = nombre;
+        String finalTelefono = telefono;
+        builder.setPositiveButton(R.string.btnSi, new DialogInterface.OnClickListener()
+        {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+
+                String email = "";
+
+                if(emails != null && emails.length>0)
+                    email = emails[0].address;
+
+                //Se lanza la aplicacion del telefono para añadir un contacto
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+                intent.putExtra("finishActivityOnSaveCompleted", true); // Fix for 4.0.3 +
+                intent.putExtra(ContactsContract.Intents.Insert.NAME, finalNombre);
+                intent.putExtra(ContactsContract.Intents.Insert.PHONE, finalTelefono);
+                intent.putExtra(ContactsContract.Intents.Insert.EMAIL, email);
+                startActivity(intent);
+
+                dialog.dismiss();
+
+            }
+
+        });
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run()
+            {
+                textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR_6);
+                builder.create().show();
+            }
+        });
+
+    }
+
+    @Override
+    public void lanzarWifi(Barcode barCode)
+    {
+        //Log.e("mainActivity", "Lanzar Wifi");
+
+        //Se obtiene los datos de la Wifi
+        Barcode.WiFi wifiCode = barCode.wifi;
+        String ssid = wifiCode.ssid;
+        String password = wifiCode.password;
+
+        //Log.e("Wifi SSID", ssid);
+        //Log.e("Wifi Password", password);
 
     }
 
@@ -367,8 +580,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     //**********************************************************************************************
 
 
-
-
+    //Este metooo carga el fragment que corresponda en el layout, dicha caarga se realiza mostrando la animacion cardflip
     private void cargarFragment()
     {
 
@@ -403,6 +615,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
+
     //Se comprueba si el usuario ha dado permiso para usar la camara y si no se solicita
     private boolean comprobarPermisoCamara()
     {
@@ -418,6 +631,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
         return false;
 
     }
+
 
 
     //Se inicia la animacion (AnimationDrawable) de la imagen de fondo de la pantalla principal
@@ -436,6 +650,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
         });
     }
+
 
 
     private void efecto_mostrar_circular(View view)

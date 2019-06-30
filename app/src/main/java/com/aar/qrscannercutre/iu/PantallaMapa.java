@@ -2,30 +2,40 @@ package com.aar.qrscannercutre.iu;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.location.Address;
+import android.location.Geocoder;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.Fragment;
-
 import com.aar.qrscannercutre.R;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PantallaMapa extends AppCompatActivity implements OnMapReadyCallback
+public class PantallaMapa extends AppCompatActivity
 {
 
     @BindView(R.id.layoutParentPantallaMapa) CoordinatorLayout layoutParentPantallaMapa;
@@ -33,6 +43,11 @@ public class PantallaMapa extends AppCompatActivity implements OnMapReadyCallbac
     @BindView(R.id.floatingBtnBack) FloatingActionButton floatingBtnBack;
 
     private GoogleMap mapa;
+    private double lat, lng;
+    private BitmapDescriptor imgMarcador;
+    private String direccion;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -41,11 +56,24 @@ public class PantallaMapa extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_pantalla_mapa);
         ButterKnife.bind(this);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.mapaQR);
+        lat = getIntent().getDoubleExtra("lat", 0);
+        lng = getIntent().getDoubleExtra("lng", 0);
+        direccion = "";
 
-        mapFragment.getMapAsync(this);
+        imgMarcador = BitmapDescriptorFactory.fromResource(R.drawable.punto_mapa);
 
+        ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapaQR)).getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap)
+            {
+                mapa = googleMap;
+
+                obtenerDireccion();
+            }
+        });
+
+
+        //Se cambia el tipo de mapa segun la opcion seleccionada
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener()
         {
             @Override
@@ -73,13 +101,6 @@ public class PantallaMapa extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
-        mapa = googleMap;
-
         layoutParentPantallaMapa.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom)
@@ -89,7 +110,9 @@ public class PantallaMapa extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+
     }
+
 
 
     @OnClick(R.id.floatingBtnBack)
@@ -97,6 +120,87 @@ public class PantallaMapa extends AppCompatActivity implements OnMapReadyCallbac
     {
         onBackPressed();
     }
+
+
+
+    //Se obtiene la direccion del punto recibido (latitud, longitud)
+    private void obtenerDireccion()
+    {
+
+        if(comprobarConexion())
+        {
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+
+            try
+            {
+                List<Address> listaDirecciones = geocoder.getFromLocation(lat, lng, 1);
+
+                if(listaDirecciones.size()>0)
+                {
+                    Address address = listaDirecciones.get(0);
+
+                    //Esto se hace por si la direccion tiene mas de una linea
+                    if(address.getMaxAddressLineIndex()>0)
+                    {
+
+                        for(int i=0; i<address.getMaxAddressLineIndex(); i++)
+                            direccion = direccion + address.getAddressLine(i)+"\n";
+
+                    }else
+                    {
+                        direccion = address.getAddressLine(0);
+                    }
+                }
+
+            } catch (IOException e)
+            {
+                Toast.makeText(getApplicationContext(), R.string.txtErrorMapa_1, Toast.LENGTH_LONG).show();
+            }
+
+        }else
+        {
+            Toast.makeText(getApplicationContext(), R.string.txtErrorMapa_2, Toast.LENGTH_LONG).show();
+        }
+
+        mostrarLocalizacion();
+    }
+
+
+
+    //Se muestra un marcador en el mapa en la localizacion escaneada por el usuario
+    private void mostrarLocalizacion()
+    {
+
+        LatLng latLng = new LatLng(lat, lng);
+
+        //Se crea el marcador en el mapa
+        Marker marcadorMapa = mapa.addMarker(new MarkerOptions()
+                .position(latLng)
+                .title(getResources().getString(R.string.txtDireccion))
+                .snippet(direccion)
+                .icon(imgMarcador)
+        );
+
+        //Nos posicionamos en la ubicacion del marcador
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, (float) 18.0);
+        mapa.animateCamera(cameraUpdate);
+
+        marcadorMapa.showInfoWindow();//Con esto hacemos que se muestre siempre la info del marcador;
+
+    }
+
+
+
+    private boolean comprobarConexion()
+    {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+
+        // Recupera todas las redes (tanto móviles como wifi)
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return (networkInfo != null);
+    }
+
 
 
     private void efecto_mostrar_circular(View view)
@@ -139,4 +243,6 @@ public class PantallaMapa extends AppCompatActivity implements OnMapReadyCallbac
         anim.start();
 
     }
+
+
 }

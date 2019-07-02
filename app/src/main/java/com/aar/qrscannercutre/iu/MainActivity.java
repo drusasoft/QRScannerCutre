@@ -14,6 +14,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.Telephony;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.Button;
@@ -422,10 +423,20 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
             public void onClick(DialogInterface dialog, int which)
             {
                 //Se lanza la aplicacion del telefono que se encarga del enivo de SMS
-                Intent intent = new Intent(Intent.ACTION_VIEW);
+                //*****Esto es para versiones antiguas de android****
+                /*Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.putExtra("address",telefono);
                 intent.putExtra("sms_body",mensaje);
                 intent.setType("vnd.android-dir/mms-sms");
+                startActivity(intent);*/
+
+                String defaultSmsPackageName = Telephony.Sms.getDefaultSmsPackage(getApplicationContext());
+                Intent  intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+telefono));
+                intent.putExtra("sms_body", mensaje);
+
+                if (defaultSmsPackageName != null) // Can be null in case that there is no default, then the user would be able to choose any app that supports this intent.
+                    intent.setPackage(defaultSmsPackageName);
+
                 startActivity(intent);
 
                 dialog.dismiss();
@@ -458,7 +469,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
                 .setTitle(R.string.titDialogEmail)
-                .setMessage(txtDialogEmail)
+                .setMessage(txtDialogEmail+" "+direccion)
                 .setNegativeButton(R.string.btnNo, null);
 
         builder.setPositiveButton(R.string.btnSi, new DialogInterface.OnClickListener()

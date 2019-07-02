@@ -19,7 +19,7 @@
     <string name="txtDialogSms">Do you want to send the SMS message?</string>
     <string name="txtDialogSms2">\nPhone:</string>
     <string name="titDialogEmail">EMAIL</string>
-    <string name="txtDialogEmail">Do you want to send the Email?</string>
+    <string name="txtDialogEmail">Do you want to send the Email?\n\nTo:</string>
     <string name="titDialogAgenda">CONTACT</string>
     <string name="txtDialogAgenda">Do you want to add contact information?</string>
     <string name="txtEscanear">Scan</string>

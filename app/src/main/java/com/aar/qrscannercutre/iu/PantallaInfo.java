@@ -92,9 +92,9 @@ public class PantallaInfo extends AppCompatActivity
             case android.R.id.home: onBackPressed();
                                     return true;
 
-            /*case R.id.menu_politicas: //Se lanaza la url donde se muestran la politicas de privacidad de la App
+            case R.id.menu_politicas: //Se lanza la url donde se muestran la politicas de privacidad de la App
                                       verPoliticasPrivacidad();
-                                      return true;*/
+                                      return true;
         }
 
         return false;
@@ -108,10 +108,10 @@ public class PantallaInfo extends AppCompatActivity
 
        if(Locale.getDefault().getLanguage().equals("es"))
        {
-           intent = new Intent(Intent.ACTION_VIEW, Uri.parse(""));
+           intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://utilities.000webhostapp.com/qrscanner_esp.html"));
        }else
        {
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(""));
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://utilities.000webhostapp.com/qrscanner_eng.html"));
        }
 
        startActivity(intent);

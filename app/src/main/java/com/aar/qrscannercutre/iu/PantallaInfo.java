@@ -2,9 +2,12 @@ package com.aar.qrscannercutre.iu;
 
 import android.animation.Animator;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.Menu;
@@ -12,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,10 +31,11 @@ public class PantallaInfo extends AppCompatActivity
 
     @BindView(R.id.toolbarInfo) Toolbar toolbar;
     @BindView(R.id.layout_contenido_info) LinearLayout layoutContenido;
+    @BindView(R.id.titToolBarInfo) TextView titToolBarInfo;
+    @BindView(R.id.textViewCreador) TextView textViewCreador;
 
     private AnimationDrawable animacionFondo;
     private boolean animacionFondoIniciada = false;
-
 
 
     @Override
@@ -43,6 +48,12 @@ public class PantallaInfo extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("");
+
+        //Se cambia la fuente de los TextViews de esta pantalla
+        Typeface fuente_sabo_filled = Typeface.createFromAsset(getAssets(), "fonts/sabo_filled.otf");
+        titToolBarInfo.setTypeface(fuente_sabo_filled);
+        textViewCreador.setTypeface(fuente_sabo_filled);
 
         setupEnterTransition();
 
@@ -78,6 +89,15 @@ public class PantallaInfo extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_pantalla_info, menu);
+
+        //Se cambia el tipo de fuente del menu popup
+        Typeface fuente_sabo_regular = Typeface.createFromAsset(getAssets(), "fonts/sabo_regular.otf");
+        MenuItem menuItemPoliticas = menu.getItem(0);
+        SpannableString stringPoliticas = new SpannableString(menuItemPoliticas.getTitle());
+
+        stringPoliticas.setSpan(new CustomTypefaceSpan("", fuente_sabo_regular), 0, stringPoliticas.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        menuItemPoliticas.setTitle(stringPoliticas);
+
         return true;
     }
 

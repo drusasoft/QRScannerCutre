@@ -127,7 +127,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="90dp"
+                android:layout_marginLeft="30dp"
                 android:layout_toEndOf="@+id/titBootomBar"
                 android:clickable="true"
                 android:transitionName="imgInfo"

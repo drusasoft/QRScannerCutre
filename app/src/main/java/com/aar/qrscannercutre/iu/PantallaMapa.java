@@ -2,11 +2,15 @@ package com.aar.qrscannercutre.iu;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -55,6 +59,8 @@ public class PantallaMapa extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_mapa);
         ButterKnife.bind(this);
+
+        cambiarFuente();//Se cambia la fuente del texto del Menu de  la BottombBar
 
         lat = getIntent().getDoubleExtra("lat", 0);
         lng = getIntent().getDoubleExtra("lng", 0);
@@ -186,6 +192,41 @@ public class PantallaMapa extends AppCompatActivity
         mapa.animateCamera(cameraUpdate);
 
         marcadorMapa.showInfoWindow();//Con esto hacemos que se muestre siempre la info del marcador;
+
+    }
+
+
+
+    //Se cambia el tipo de fuente del menu desplegable de la Bottombar
+    private void cambiarFuente()
+    {
+
+        if(bottomAppBar != null)
+        {
+            Typeface fuente_sabo_regular = Typeface.createFromAsset(getAssets(),"fonts/sabo_regular.otf");
+
+            Menu menu = bottomAppBar.getMenu();
+
+            MenuItem menuItemVistaNormal = menu.getItem(0);
+            MenuItem menuItemVistaHibrida = menu.getItem(1);
+            MenuItem menuItemVistaSatelite = menu.getItem(2);
+            MenuItem menuItemVistaTerreno = menu.getItem(3);
+
+            SpannableString stringNormal = new SpannableString(menuItemVistaNormal.getTitle());
+            SpannableString stringHibrida = new SpannableString(menuItemVistaHibrida.getTitle());
+            SpannableString stringSatelite = new SpannableString(menuItemVistaSatelite.getTitle());
+            SpannableString stringTerreno = new SpannableString(menuItemVistaTerreno.getTitle());
+
+            stringNormal.setSpan(new CustomTypefaceSpan("", fuente_sabo_regular),0, stringNormal.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            stringHibrida.setSpan(new CustomTypefaceSpan("", fuente_sabo_regular),0, stringHibrida.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            stringSatelite.setSpan(new CustomTypefaceSpan("", fuente_sabo_regular),0, stringSatelite.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+            stringTerreno.setSpan(new CustomTypefaceSpan("", fuente_sabo_regular),0, stringTerreno.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+
+            menuItemVistaNormal.setTitle(stringNormal);
+            menuItemVistaHibrida.setTitle(stringHibrida);
+            menuItemVistaSatelite.setTitle(stringSatelite);
+            menuItemVistaTerreno.setTitle(stringTerreno);
+        }
 
     }
 

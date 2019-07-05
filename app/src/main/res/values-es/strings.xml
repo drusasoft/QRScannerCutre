@@ -8,6 +8,7 @@
     <string name="txtPermiso">Para poder usar la App debes permitir usar la camara</string>
     <string name="btnSi">Si</string>
     <string name="btnNo">No</string>
+    <string name="btnAceptar">Aceptar</string>
     <string name="txtErrorWeb">Error, URL con formato incorrecto</string>
     <string name="titDialogLlamada">LLAMADA</string>
     <string name="txtDialogLlamada">¿Quieres llamar al telefono </string>
@@ -22,6 +23,8 @@
     <string name="txtDialogEmail">¿Quieres enviar el Email?\n\nPara:</string>
     <string name="titDialogAgenda">CONTACTO</string>
     <string name="txtDialogAgenda">¿Quieres añadir los datos de contacto a la Agenda?</string>
+    <string name="titDialogTexto">TEXTO</string>
+    <string name="txtDialogTexto">Texto contenido en el Código:\n\n</string>
     <string name="txtEscanear">Escanear</string>
     <string name="txtTipoCodigoQR">Código QR: --</string>
     <string name="txtTipoCodigoQR_1">Código QR: Url</string>
@@ -30,6 +33,7 @@
     <string name="txtTipoCodigoQR_4">Código QR: Sms</string>
     <string name="txtTipoCodigoQR_5">Código QR: Email</string>
     <string name="txtTipoCodigoQR_6">Código QR: Contacto</string>
+    <string name="txtTipoCodigoQR_7">Código QR: Texto</string>
     <!-- Fin Pantalla Main-->
 
 

@@ -10,6 +10,7 @@ import android.app.ActivityOptions;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 {
 
     @BindView(R.id.toolbarMain) BottomAppBar bottomAppBar;
+    @BindView(R.id.titBootomBar) TextView textViewTitulo;
     @BindView(R.id.floatingBtnShowScanner) FloatingActionButton floatingBtnScanner;
     @BindView(R.id.layoutParentMain) CoordinatorLayout layoutParentMain;
     @BindView(R.id.layoutContenedorFragments) FrameLayout layoutContenedorFragments;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     @BindString(R.string.txtDialogSms2) String txtDialogSms2;
     @BindString(R.string.txtDialogEmail) String txtDialogEmail;
     @BindString(R.string.txtDialogAgenda) String txtDialogAgenda;
+    @BindString(R.string.txtDialogTexto) String txtDialogTexto;
 
     private FragmentMainActivity fragmentMainActivity;
     private FragmentQRScanner fragmentQRScanner;
@@ -76,6 +79,13 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
         ButterKnife.bind(this);
 
         animacion_fondo();
+
+        //Se cambia la fuente de los TextViews de esta pantalla
+        Typeface fuente_sabo_filled = Typeface.createFromAsset(getAssets(), "fonts/sabo_filled.otf");
+        Typeface fuente_sabo_regular = Typeface.createFromAsset(getAssets(), "fonts/sabo_regular.otf");
+        textViewTitulo.setTypeface(fuente_sabo_filled);
+        btnScanner.setTypeface(fuente_sabo_regular);
+        textViewTipoCodigoQR.setTypeface(fuente_sabo_regular);
 
         //Se crean los dos fragment que componen la pantalla principal
         fragmentMainActivity = new FragmentMainActivity();
@@ -571,6 +581,32 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
     }
 
+
+
+    @Override
+    public void lanzarTexto(Barcode barCode)
+    {
+        //Se obtiene el texto del BarCode
+        String texto = txtDialogTexto+barCode.rawValue;
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
+                .setTitle(R.string.titDialogTexto)
+                .setMessage(texto)
+                .setPositiveButton(R.string.btnAceptar, null);
+
+        runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR_7);
+                builder.create().show();
+            }
+        });
+    }
+
+
+
     @Override
     public void lanzarWifi(Barcode barCode)
     {
@@ -589,6 +625,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     //**********************************************************************************************
         //Fin Metodos que llaman al Presentador y que son llamados desde el Presentador
     //**********************************************************************************************
+
 
 
     //Este metooo carga el fragment que corresponda en el layout, dicha caarga se realiza mostrando la animacion cardflip

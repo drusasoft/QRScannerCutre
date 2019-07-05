@@ -11,5 +11,6 @@ public interface VistaMainActivity extends VistaBase
     void lanzarSms(Barcode barCode);
     void lanzarEmail(Barcode barCode);
     void lanzarAgenda(Barcode barCode);
+    void lanzarTexto(Barcode barCode);
     void lanzarWifi(Barcode barCode);
 }

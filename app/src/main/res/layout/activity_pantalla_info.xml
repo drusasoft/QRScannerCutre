@@ -15,7 +15,19 @@
         app:popupTheme="@style/AppTheme.toolBarPopupTheme"
         app:titleTextColor="@color/colorAmarillo"
         app:titleTextAppearance="@style/AppTheme.toolBarTextStyle"
-        android:visibility="invisible"/>
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/titToolBarInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/tit_pantalla_info"
+            android:textColor="@color/colorAmarillo"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:gravity="center_vertical"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <ImageView
         android:layout_width="55dp"
@@ -35,6 +47,7 @@
         android:visibility="invisible">
 
         <TextView
+            android:id="@+id/textViewCreador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"

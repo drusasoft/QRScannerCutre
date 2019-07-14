@@ -13,9 +13,13 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.provider.Telephony;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.Button;
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     @BindString(R.string.txtDialogEmail) String txtDialogEmail;
     @BindString(R.string.txtDialogAgenda) String txtDialogAgenda;
     @BindString(R.string.txtDialogTexto) String txtDialogTexto;
+    @BindString(R.string.txtDialogWifi) String txtDialogWifi;
+    @BindString(R.string.txtDialogWifi2) String txtDialogWifi2;
+    @BindString(R.string.txtDialogWifi3) String txtDialogWifi3;
 
     private FragmentMainActivity fragmentMainActivity;
     private FragmentQRScanner fragmentQRScanner;
@@ -610,15 +617,48 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     @Override
     public void lanzarWifi(Barcode barCode)
     {
-        //Log.e("mainActivity", "Lanzar Wifi");
-
         //Se obtiene los datos de la Wifi
         Barcode.WiFi wifiCode = barCode.wifi;
         String ssid = wifiCode.ssid;
         String password = wifiCode.password;
 
-        //Log.e("Wifi SSID", ssid);
-        //Log.e("Wifi Password", password);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
+                .setTitle(R.string.titDialogWifi)
+                .setMessage(txtDialogWifi+txtDialogWifi2+" "+ssid+txtDialogWifi3+password)
+                .setNegativeButton(R.string.btnNo, null);
+
+        builder.setPositiveButton(R.string.btnSi, new DialogInterface.OnClickListener()
+         {
+                 @Override
+                 public void onClick(DialogInterface dialog, int which)
+                 {
+
+                     WifiConfiguration wifiConfiguration = new WifiConfiguration();
+                     wifiConfiguration.SSID = String.format("\"%s\"", ssid);
+                     wifiConfiguration.preSharedKey = String.format("\"%s\"", password);
+
+                     WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+                     wifiManager.addNetwork(wifiConfiguration);//Se añade la nueva red wifi
+
+                     Toast.makeText(getApplicationContext(), R.string.txtWifiOk, Toast.LENGTH_LONG).show();
+
+                     //Se lanza la pantalla de configuracion de la wifi del telefono para que el usaurio pueda seleccionar la nueva wifi guardada
+                     Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                     startActivity(intent);
+
+                 }
+
+         });
+
+        runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR_8);
+                builder.create().show();
+            }
+        });
 
     }
 

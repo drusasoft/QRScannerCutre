@@ -26,6 +26,11 @@
     <string name="titDialogTexto">TEXT</string>
     <string name="txtDialogTexto">Text contained in the Code:\n\n</string>
     <string name="txtEscanear">Scan</string>
+    <string name="titDialogWifi">WIFI</string>
+    <string name="txtDialogWifi">Do you want to add this Wifi Network?</string>
+    <string name="txtDialogWifi2">\n\nSSID:</string>
+    <string name="txtDialogWifi3">\nPassword:</string>
+    <string name="txtWifiOk">The Wifi Network was created and saved</string>
     <string name="txtTipoCodigoQR">QR Code: --</string>
     <string name="txtTipoCodigoQR_1">QR Code: Url</string>
     <string name="txtTipoCodigoQR_2">QR Code: Call</string>
@@ -34,6 +39,7 @@
     <string name="txtTipoCodigoQR_5">QR Code: Email</string>
     <string name="txtTipoCodigoQR_6">QR Code: Contact</string>
     <string name="txtTipoCodigoQR_7">QR Code: Text</string>
+    <string name="txtTipoCodigoQR_8">QR Code: Wifi</string>
     <!-- Fin Pantalla Main-->
 
 

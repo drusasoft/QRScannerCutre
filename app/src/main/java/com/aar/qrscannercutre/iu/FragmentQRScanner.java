@@ -309,9 +309,9 @@ public class FragmentQRScanner extends Fragment implements SurfaceHolder.Callbac
                 ((MainActivity)getActivity()).lanzarTexto(barCode);
                 break;
 
-            /*case Barcode.WIFI:
+            case Barcode.WIFI:
                 ((MainActivity) getActivity()).lanzarWifi(barCode);
-                break;*/
+                break;
 
         }
 

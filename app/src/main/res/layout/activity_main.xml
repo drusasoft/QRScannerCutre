@@ -81,6 +81,7 @@
                     android:textStyle="bold"
                     android:visibility="invisible"
                     app:icon="@mipmap/ic_qr"
+                    app:iconTint="@color/colorAmarillo"
                     app:rippleColor="@color/colorAmarillo"
                     app:strokeColor="@color/colorAmarillo"/>
 
@@ -148,6 +149,19 @@
         app:rippleColor="@color/colorNegro"
         app:srcCompat="@mipmap/ic_qr"
         app:layout_anchor="@id/toolbarMain"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingBtnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="100dp"
+        app:rippleColor="@color/colorNegro"
+        app:srcCompat="@mipmap/ic_qr_skull"
+        app:layout_anchor="@id/toolbarMain"
+        app:layout_anchorGravity="right"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

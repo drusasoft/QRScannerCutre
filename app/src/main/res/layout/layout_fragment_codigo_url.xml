@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/textura_transparente_2">
+
+    <TextView
+        android:id="@+id/titCodigoUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:text="@string/titCodigoTexto"
+        android:textColor="@color/colorAmarillo"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@color/colorAmarillo"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/AppTheme.TextInputLayoutAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="@string/hintUrlCodigoQR"
+        app:boxStrokeColor="@color/color_text_input">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_Url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:maxLines="1"
+            android:inputType="text"
+            android:textColor="@color/colorAmarillo"
+            android:textCursorDrawable="@color/colorAmarillo"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCrearCodigoUrl"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="25dp"
+        android:textColor="@color/colorAmarillo"
+        android:textStyle="bold"
+        android:text="@string/btnCrear"
+        app:icon="@mipmap/ic_qr_skull"
+        app:iconTint="@color/colorAmarillo"
+        app:rippleColor="@color/colorAmarillo"
+        app:strokeColor="@color/colorAmarillo"/>
+
+
+</LinearLayout>

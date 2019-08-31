@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:oneshot="false">
+
+    <item android:drawable="@drawable/frame_creator0" android:duration="200"/>
+    <item android:drawable="@drawable/frame_creator1" android:duration="200"/>
+    <item android:drawable="@drawable/frame_creator2" android:duration="200"/>
+    <item android:drawable="@drawable/frame_creator3" android:duration="200"/>
+    <item android:drawable="@drawable/frame_creator4" android:duration="200"/>
+    <item android:drawable="@drawable/frame_creator5" android:duration="200"/>
+    <item android:drawable="@drawable/frame_creator6" android:duration="200"/>
+    <item android:drawable="@drawable/frame_creator7" android:duration="200"/>
+
+</animation-list>

@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".QRScannerCutre"
@@ -16,6 +18,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:largeHeap="true">
+
+        <!--Es necesario usar un provider para poder acceder a la uri de un fichero desde un intent, (En el caso de esta aplicacion, para el intent de compartir el fichero
+        Esto es necesario desde la Api 24-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.aar.qrscannercutre.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+
+        </provider>
+
 
         <!--La Api_Key para google Maps-->
         <meta-data android:name="com.google.android.geo.API_KEY"
@@ -35,8 +52,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".iu.PantallaInfo" android:screenOrientation="portrait" android:label="@string/tit_pantalla_info"/>
+        <activity android:name=".iu.PantallaInfo" android:screenOrientation="portrait" android:label="@string/titPantallaInfo"/>
         <activity android:name=".iu.PantallaMapa" android:screenOrientation="portrait"/>
+        <activity android:name=".iu.PantallaQRCreator" android:screenOrientation="portrait" android:label="@string/titPantallaQrCreator"/>
 
     </application>
 

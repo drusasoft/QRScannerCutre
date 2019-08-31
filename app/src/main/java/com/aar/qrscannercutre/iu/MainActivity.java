@@ -19,9 +19,10 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.provider.Telephony;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.WindowManager;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     @BindView(R.id.toolbarMain) BottomAppBar bottomAppBar;
     @BindView(R.id.titBootomBar) TextView textViewTitulo;
     @BindView(R.id.floatingBtnShowScanner) FloatingActionButton floatingBtnScanner;
+    @BindView(R.id.floatingBtnCreate) FloatingActionButton floatingBtnCreate;
     @BindView(R.id.layoutParentMain) CoordinatorLayout layoutParentMain;
     @BindView(R.id.layoutContenedorFragments) FrameLayout layoutContenedorFragments;
     @BindView(R.id.layoutBtnScanner) LinearLayout layoutBtnScanner;
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     private boolean animacionFondoIniciada = false;
 
     private final int PERMISSIONS_REQUEST_CAMERA = 100;
+    private final int PERMISSIONS_REQUEST_WRITE = 101;
 
 
     @Override
@@ -84,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        //Muestra en Pantalla Completa
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         animacion_fondo();
 
@@ -159,6 +165,12 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
         if(requestCode == PERMISSIONS_REQUEST_CAMERA && grantResults[0] == PackageManager.PERMISSION_DENIED)
         {
             Toast.makeText(this, R.string.txtPermiso, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(requestCode == PERMISSIONS_REQUEST_WRITE && grantResults[0] == PackageManager.PERMISSION_DENIED)
+        {
+            Toast.makeText(this, R.string.txtPermiso2, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -199,6 +211,17 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
         }
 
+    }
+
+
+    @OnClick(R.id.floatingBtnCreate)
+    public void irPantallaQRCreator()
+    {
+        if(comprobarPermisoEscritura())
+        {
+            Intent intent = new Intent(this, PantallaQRCreator.class);
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        }
     }
 
 
@@ -246,6 +269,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     //**********************************************************************************************
 
     //Se llama al metodo del Presntador que devuelve un objeto de la Clase Detector (que es la clase que escanea los CodigosQR)
+    //Este metodo es llamado desde el FragmentQRScanner para asociar al objeto BarcodeDetector el objeto DetectorCodigos (Detector.Processor)
     public DetectorCodigos getDetectorCodigos()
     {
         return presentadorMainActivity.getDetectorCodigos();
@@ -684,6 +708,8 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
                     .replace(R.id.layoutContenedorFragments, fragmentQRScanner, "fragment_QRScanner")
                     .commit();
 
+            floatingBtnCreate.hide();
+
         }else
         {
 
@@ -697,6 +723,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
                     .commit();
 
             fragmentQRScanner.liberarRecursos();
+            floatingBtnCreate.show();
 
         }
 
@@ -709,12 +736,24 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     {
 
         if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)
+            return true;
+        else
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CAMERA);
+
+        return false;
+
+    }
+
+
+    //Se comprueba si el usuario ha dado permiso para escribir datos en el sistema de archivos
+    private boolean comprobarPermisoEscritura()
+    {
+
+        if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
         {
             return true;
         }else
-        {
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, PERMISSIONS_REQUEST_CAMERA);
-        }
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_WRITE);
 
         return false;
 
@@ -775,6 +814,8 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
                 public void onAnimationEnd(Animator animation)
                 {
                     floatingBtnScanner.show();
+                    floatingBtnCreate.show();
+                    efecto_translate();
                 }
             });
         }
@@ -783,6 +824,16 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
         view.setVisibility(View.VISIBLE);
         anim.start();
 
+    }
+
+
+    private void efecto_translate()
+    {
+        TranslateAnimation translateAnimation = new TranslateAnimation(0.0f, 0.0f,145.0f,0.0f);
+        translateAnimation.setDuration(1000);
+        translateAnimation.setStartOffset(500);
+
+        floatingBtnCreate.startAnimation(translateAnimation);
     }
 
 

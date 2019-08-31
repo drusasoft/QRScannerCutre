@@ -1,5 +1,6 @@
 package com.aar.qrscannercutre.modelo;
 
+import com.aar.qrscannercutre.presentador.PresentadorBase;
 import com.aar.qrscannercutre.presentador.PresentadorMainActivity;
 import com.google.android.gms.vision.barcode.Barcode;
 
@@ -7,12 +8,12 @@ public class DataManagerDetectorCodigos
 {
 
     private DetectorCodigos detectorCodigos;
-    private PresentadorMainActivity presentadorMainActivity;
+    private PresentadorMainActivity presentador;
 
 
-    public void setPresentadorMainActivity(PresentadorMainActivity presentadorMainActivity)
+    public void setPresentador(PresentadorBase presentador)
     {
-        this.presentadorMainActivity = presentadorMainActivity;
+        this.presentador = (PresentadorMainActivity) presentador;
     }
 
 
@@ -30,7 +31,7 @@ public class DataManagerDetectorCodigos
     //Se llama al presentador para que muestre el resultado de la captura en la Pantalla
     public void mostrarResultadoCaptura(Barcode barCode)
     {
-        presentadorMainActivity.gestionarCapturaCodigo(barCode);
+        presentador.gestionarCapturaCodigo(barCode);
     }
 
 

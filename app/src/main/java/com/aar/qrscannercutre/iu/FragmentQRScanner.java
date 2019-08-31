@@ -47,9 +47,7 @@ public class FragmentQRScanner extends Fragment implements SurfaceHolder.Callbac
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
     }
-
 
 
     @Nullable
@@ -71,7 +69,9 @@ public class FragmentQRScanner extends Fragment implements SurfaceHolder.Callbac
     public void onDestroy()
     {
         super.onDestroy();
-        unbinder.unbind();
+
+        if(unbinder != null)
+            unbinder.unbind();
 
         liberarRecursos();
     }

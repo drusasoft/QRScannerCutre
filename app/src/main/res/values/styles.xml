@@ -35,4 +35,10 @@
     <!-- Fin Estilo de la Toolbar-->
 
 
+    <style name="AppTheme.TextInputLayoutAppearance" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintTextColor">@color/colorAmarillo</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+    </style>
+
+
 </resources>

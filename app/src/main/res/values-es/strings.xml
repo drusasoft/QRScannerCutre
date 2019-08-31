@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">QRScanner</string>
+    <string name="app_name">QR Scanner</string>
 
 
     <!-- Pantalla main-->
     <string name="titDialogWeb">WEB</string>
-    <string name="txtDialogWeb">¿Quieres acceder a la dirección,</string>
+    <string name="txtDialogWeb">¿Quieres acceder a la dirección</string>
     <string name="txtPermiso">Para poder usar la App debes permitir usar la camara</string>
+    <string name="txtPermiso2">Para poder usar esta opción debes permitir crear archivos</string>
     <string name="btnSi">Si</string>
     <string name="btnNo">No</string>
     <string name="btnAceptar">Aceptar</string>
@@ -44,7 +45,7 @@
 
 
     <!-- Pantalla Info -->
-    <string name="tit_pantalla_info">Info</string>
+    <string name="titPantallaInfo">Info</string>
     <string name="txtPantallaInfo">Realizado por Angel Acuña \n drusa.soft@gmail.com</string>
     <string name="txtMenuInfo">Politicas Privacidad</string>
     <!-- Fin Pantalla Info-->
@@ -64,6 +65,37 @@
     <!-- Fragment QRScanner-->
     <string name="txtErrorFragmentQRScanner">Error, No se ha podido realizar la captura</string>
     <!-- Fin Fragment QRScanner-->
+
+    <!-- Pantalla QRCreator-->
+    <string name="titPantallaQrCreator">QR Creator</string>
+    <string name="titTipoCodigoQR">Tipo Código</string>
+    <string name="titDialogGuardar">Guardar Código</string>
+    <string name="titCodigoTexto">Datos Código</string>
+    <string name="chipTexto">Texto</string>
+    <string name="chipUrl">Url</string>
+    <string name="chipSms">Sms</string>
+    <string name="chipGeo">Geo</string>
+    <string name="chipEmail">Email</string>
+    <string name="chipLlamada">Telf</string>
+    <string name="hintNombreCodigoQR">Nombre Código</string>
+    <string name="hintTextoCodigoQR">Introduce Texto</string>
+    <string name="hintUrlCodigoQR">Introduce Url</string>
+    <string name="hintSmsCodigoQR_1">Telefono</string>
+    <string name="hintSmsCodigoQR_2">Texto Mensaje</string>
+    <string name="hintEmailCodigoQR_1">Para</string>
+    <string name="hintEmailCodigoQR_2">Asunto</string>
+    <string name="hintEmailCodigoQR_3">Contenido</string>
+    <string name="btnCrear">Crear</string>
+    <string name="errorCrearCodigoQR">Error, No se ha podido crear el CódigoQR</string>
+    <string name="errorTextoCodigoQR">Debes intoducir un texto valido</string>
+    <string name="errorUrlCodigoQR">Debes intoducir una Url valida</string>
+    <string name="errorSmsCodigoQR">Debes intoducir todos los datos (Telefono y Texto)</string>
+    <string name="errorEmailCodigoQR">Debes introducir el destinatario del Email</string>
+    <string name="errorAccesoTarjetaSD">Error Acceso, No se ha podido guardar el Código QR</string>
+    <string name="errorCompartirCodigoQR">Error Compartir, No se ha podido guardar el Código QR</string>
+    <string name="errorGuardarCodigoQR">Error, No se ha podido guardar el Código QR</string>
+    <string name="errorNombreCodigoQR">Debes introducir un nombre para el CodigoQR creado</string>
+    <!-- Fin Pantalla QRCreator-->
 
 
 </resources>

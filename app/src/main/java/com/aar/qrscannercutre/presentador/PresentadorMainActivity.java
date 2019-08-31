@@ -16,7 +16,7 @@ public class PresentadorMainActivity implements PresentadorMVPMainActivity
     public PresentadorMainActivity(DataManagerDetectorCodigos dataManagerDetectorCodigos)
     {
         this.dataManagerDetectorCodigos = dataManagerDetectorCodigos;
-        dataManagerDetectorCodigos.setPresentadorMainActivity(this);
+        dataManagerDetectorCodigos.setPresentador(this);
     }
 
 

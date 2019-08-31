@@ -4,6 +4,8 @@
     <color name="colorFondo">#37474F</color>
     <color name="colorAmarillo">#FBC02D</color>
     <color name="colorAmarilloClaro">#FDD835</color>
+    <color name="colorAmarilloClaro2">#FFECB3</color>
+    <color name="colorHint">#F9A825</color>
     <color name="transparente">#00ffffff</color>
 
 </resources>

@@ -11,6 +11,7 @@
     <string name="btnNo">No</string>
     <string name="btnAceptar">Accept</string>
     <string name="txtErrorWeb">Error, URL formatted incorrectly</string>
+    <string name="txtErrorWifi">In order to connect to this Wi-Fi network it is necessary that you activate the Wi-Fi on the Device</string>
     <string name="titDialogLlamada">CALL</string>
     <string name="txtDialogLlamada">Do you want to call</string>
     <string name="titDialogMapa">MAP</string>
@@ -51,6 +52,14 @@
     <!-- Fin Pantalla Info-->
 
 
+    <!-- Pantalla Seleccionar Posicion-->
+    <string name="titPantallaSelecPosicion">Map</string>
+    <string name="txtPosicion">Coordinates</string>
+    <string name="txtDialogCoordenadas">Do you want to use these coordinates?\n\n</string>
+    <string name="txtErrorMapa">In order to display the map, an Internet connection is required</string>
+    <!-- Fin Pantalla Seleccionar Posicion-->
+
+
     <!--Pantalla Mapa-->
     <string name="txtDireccion">Address</string>
     <string name="txtErrorMapa_1">The address could not be obtained</string>
@@ -71,12 +80,13 @@
     <string name="titTipoCodigoQR">Type Code</string>
     <string name="titDialogGuardar">Save Code</string>
     <string name="titCodigoTexto">Data Code</string>
+    <string name="titIrMapa">Select position on Map</string>
     <string name="chipTexto">Text</string>
     <string name="chipUrl">Url</string>
     <string name="chipSms">Sms</string>
     <string name="chipGeo">Geo</string>
     <string name="chipEmail">Email</string>
-    <string name="chipLlamada">Telf</string>
+    <string name="chipLlamada">Phone</string>
     <string name="hintNombreCodigoQR">Code Name</string>
     <string name="hintTextoCodigoQR">Enter Text</string>
     <string name="hintUrlCodigoQR">Enter Url</string>
@@ -85,17 +95,48 @@
     <string name="hintEmailCodigoQR_1">To</string>
     <string name="hintEmailCodigoQR_2">Subject</string>
     <string name="hintEmailCodigoQR_3">Body</string>
+    <string name="hintTelfCodigoQR">Phone</string>
+    <string name="hintGeoCodigoQR_1">Latitude</string>
+    <string name="hintGeoCodigoQR_2">Longitude</string>
     <string name="btnCrear">Create</string>
+    <string name="btnCerrar">Close</string>
+    <string name="txtGuardadoOK">The QR Code has been saved correctly</string>
     <string name="errorCrearCodigoQR">Error, Could not create QR Code</string>
     <string name="errorTextoCodigoQR">You must enter a valid text</string>
     <string name="errorUrlCodigoQR">You must enter a valid Url</string>
     <string name="errorSmsCodigoQR">You must enter all the data (Telephone and Text)</string>
     <string name="errorEmailCodigoQR">You must enter the email recipient</string>
+    <string name="errorTelfCodigoQR">You must enter the phone number</string>
+    <string name="errorGeoCodigoQR">You must enter Latitude and Longitude</string>
     <string name="errorAccesoTarjetaSD">Access Error, The QR Code could not be saved</string>
     <string name="errorCompartirCodigoQR">Error Sharing, The QR Code could not be saved</string>
     <string name="errorGuardarCodigoQR">Error, No se ha podido guardar el Código QR</string>
     <string name="errorNombreCodigoQR">Debes introducir un nombre para el CodigoQR creado</string>
+    <string name="txtTipoCodigoTexto">Text</string>
+    <string name="txtTipoCodigoUrl">Url</string>
+    <string name="txtTipoCodigoSms">Sms</string>
+    <string name="txtTipoCodigoEmail">Email</string>
+    <string name="txtTipoCodigoTelf">Phone</string>
+    <string name="txtTipoCodigoGeo">Geolocation</string>
+    <string name="menu_guardar">Save</string>
+    <string name="menu_compartir">Share</string>
+    <string name="menu_borrar">Discard</string>
     <!-- Fin Pantalla QRCreator-->
+
+    <!--Pantalla Lista QR-->
+    <string name="titPantallaListaQR">QR List</string>
+    <string name="txtListaVacia">You currently have no saved QR Code</string>
+    <string name="errorEliminarCodigo">Error, could not delete the QR Code</string>
+    <string name="errorMostrarCodigo">Error, this CodeQR could not be loaded</string>
+    <!--Fin Pantalla Lista QR-->
+
+    <!-- Pantalla CodigoQR-->
+    <string name="titPantallaCodigo">QR Code</string>
+    <string name="txtNombreCodigo">Name:</string>
+    <string name="txtTipoCodigo">Type:</string>
+    <string name="txtFechaCodigo">Date:</string>
+    <string name="errorCompartirCodigoQR_2">Error Sharing, Could not get image from QR Code</string>
+    <!-- Fin Pantalla CodigoQR-->
 
 
 </resources>

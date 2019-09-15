@@ -6,6 +6,7 @@ import com.aar.qrscannercutre.modelo.DataManagerCreadorCodigos;
 import com.aar.qrscannercutre.modelo.DataManagerDataBase;
 import com.aar.qrscannercutre.modelo.DataManagerDetectorCodigos;
 
+
 public class QRScannerCutre extends Application
 {
 

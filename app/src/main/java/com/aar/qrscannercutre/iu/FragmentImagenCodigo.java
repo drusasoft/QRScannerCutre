@@ -2,7 +2,6 @@ package com.aar.qrscannercutre.iu;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.aar.qrscannercutre.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +25,7 @@ public class FragmentCodigoEmail extends Fragment
     @Nullable @BindView(R.id.editTextEmail_to) TextInputEditText editTextEmailTo;
     @Nullable @BindView(R.id.editTextEmail_subject) TextInputEditText editTextEmailSubject;
     @Nullable @BindView(R.id.editTextEmail_body) TextInputEditText editTextEmailBody;
+    @Nullable @BindView(R.id.btnCrearCodigoEmail) MaterialButton btnCrearCodigoEmail;
 
     private Unbinder unbinder;
 
@@ -37,7 +39,7 @@ public class FragmentCodigoEmail extends Fragment
 
         Typeface fuente_sabo_regular = Typeface.createFromAsset(getContext().getAssets(), "fonts/sabo_regular.otf");
         titCodigoEmail.setTypeface(fuente_sabo_regular);
-        titCodigoEmail.setTypeface(fuente_sabo_regular);
+        btnCrearCodigoEmail.setTypeface(fuente_sabo_regular);
 
         return viewRoot;
 
@@ -74,4 +76,6 @@ public class FragmentCodigoEmail extends Fragment
         }
 
     }
+
+
 }

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/textura_fragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:elevation="4dp"
+            android:background="@drawable/textura_dialog"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:id="@+id/btnShareQR"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="end"
+                app:iconGravity="textEnd"
+                app:icon="@android:drawable/ic_menu_share"
+                app:iconTint="@color/colorAmarillo"
+                app:rippleColor="@color/colorAmarillo"
+                app:strokeColor="@color/colorAmarillo"/>
+
+
+            <ImageView
+                android:id="@+id/imgCodigoQR"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center_horizontal"
+                android:transitionName="codigoQR"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorAmarillo"/>
+
+
+                <TextView
+                    android:id="@+id/textViewNombreCodigo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="@color/colorAmarillo"/>
+
+                <TextView
+                    android:id="@+id/textViewTipoCodigo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="@color/colorAmarillo"/>
+
+                <TextView
+                    android:id="@+id/textViewFechaCodigo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="@color/colorAmarillo"/>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/toolbarPantallaCodigo"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:visibility="visible"
+        android:theme="@style/AppTheme.toolbarStyle"
+        app:backgroundTint="@color/colorNegro"
+        app:titleTextAppearance="@style/AppTheme.toolBarTextStyle"
+        app:fabAlignmentMode="end"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="6dp">
+
+        <TextView
+            android:id="@+id/titPantallaCodigo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titPantallaCodigo"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorAmarillo"/>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingBtnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:tag="btnBack"
+        app:rippleColor="@color/colorNegro"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        app:layout_anchor="@id/toolbarPantallaCodigo"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

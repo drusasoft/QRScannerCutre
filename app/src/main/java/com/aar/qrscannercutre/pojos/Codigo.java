@@ -8,20 +8,22 @@ public class Codigo
     private String tipo;
     private String path;
     private String fecha;
-
+    private String timeMillis;
+    private boolean seleccionado=false;
 
     public Codigo()
     {
 
     }
 
-    public Codigo(String nombre, String nombre_imagen, String tipo, String path, String fecha)
+    public Codigo(String nombre, String nombre_imagen, String tipo, String path, String fecha, String timeMillis)
     {
         this.nombre = nombre;
         this.nombre_imagen = nombre_imagen;
         this.tipo = tipo;
         this.path = path;
         this.fecha = fecha;
+        this.timeMillis = timeMillis;
     }
 
     public String getNombre() {
@@ -62,6 +64,22 @@ public class Codigo
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getTimeMillis() {
+        return timeMillis;
+    }
+
+    public void setTimeMillis(String timeMillis) {
+        this.timeMillis = timeMillis;
+    }
+
+    public boolean isSeleccionado() {
+        return seleccionado;
+    }
+
+    public void setSeleccionado(boolean seleccionado) {
+        this.seleccionado = seleccionado;
     }
 
 }

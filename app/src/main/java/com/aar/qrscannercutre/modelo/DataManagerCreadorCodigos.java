@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.widget.Toast;
-
 import com.aar.qrscannercutre.R;
 import com.aar.qrscannercutre.presentador.PresentadorBase;
 import com.aar.qrscannercutre.presentador.PresentadorPantallaQRCreator;
@@ -12,6 +11,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+
 
 public class DataManagerCreadorCodigos
 {

@@ -11,6 +11,7 @@
     <string name="btnNo">No</string>
     <string name="btnAceptar">Aceptar</string>
     <string name="txtErrorWeb">Error, URL con formato incorrecto</string>
+    <string name="txtErrorWifi">Para poder conectarte a esta red Wifi, es necesario que actives la Wifi en el dispositivo</string>
     <string name="titDialogLlamada">LLAMADA</string>
     <string name="txtDialogLlamada">¿Quieres llamar al telefono </string>
     <string name="titDialogMapa">MAPA</string>
@@ -51,6 +52,14 @@
     <!-- Fin Pantalla Info-->
 
 
+    <!-- Pantalla Seleccionar Posicion-->
+    <string name="titPantallaSelecPosicion">Mapa</string>
+    <string name="txtPosicion">Coordenadas</string>
+    <string name="txtDialogCoordenadas">¿Quieres utilizar estas coordenadas?\n\n</string>
+    <string name="txtErrorMapa">Para poder mostrar el mapa, es necesario conexion a Internet</string>
+    <!-- Fin Pantalla Seleccionar Posicion-->
+
+
     <!--Pantalla Mapa-->
     <string name="txtDireccion">Dirección</string>
     <string name="txtErrorMapa_1">No se ha podido obtener la dirección</string>
@@ -71,6 +80,7 @@
     <string name="titTipoCodigoQR">Tipo Código</string>
     <string name="titDialogGuardar">Guardar Código</string>
     <string name="titCodigoTexto">Datos Código</string>
+    <string name="titIrMapa">Seleccionar posición en Mapa</string>
     <string name="chipTexto">Texto</string>
     <string name="chipUrl">Url</string>
     <string name="chipSms">Sms</string>
@@ -85,17 +95,48 @@
     <string name="hintEmailCodigoQR_1">Para</string>
     <string name="hintEmailCodigoQR_2">Asunto</string>
     <string name="hintEmailCodigoQR_3">Contenido</string>
+    <string name="hintTelfCodigoQR">Teléfono</string>
+    <string name="hintGeoCodigoQR_1">Latitud</string>
+    <string name="hintGeoCodigoQR_2">Longitud</string>
     <string name="btnCrear">Crear</string>
+    <string name="btnCerrar">Cerrar</string>
+    <string name="txtGuardadoOK">El Código QR se ha guardado Correctamente</string>
     <string name="errorCrearCodigoQR">Error, No se ha podido crear el CódigoQR</string>
     <string name="errorTextoCodigoQR">Debes intoducir un texto valido</string>
     <string name="errorUrlCodigoQR">Debes intoducir una Url valida</string>
     <string name="errorSmsCodigoQR">Debes intoducir todos los datos (Telefono y Texto)</string>
     <string name="errorEmailCodigoQR">Debes introducir el destinatario del Email</string>
+    <string name="errorTelfCodigoQR">Debes introducir el número de teléfono</string>
+    <string name="errorGeoCodigoQR">Debes introducir la Latitud y Longitud</string>
     <string name="errorAccesoTarjetaSD">Error Acceso, No se ha podido guardar el Código QR</string>
     <string name="errorCompartirCodigoQR">Error Compartir, No se ha podido guardar el Código QR</string>
     <string name="errorGuardarCodigoQR">Error, No se ha podido guardar el Código QR</string>
     <string name="errorNombreCodigoQR">Debes introducir un nombre para el CodigoQR creado</string>
+    <string name="txtTipoCodigoTexto">Texto</string>
+    <string name="txtTipoCodigoUrl">Url</string>
+    <string name="txtTipoCodigoSms">Sms</string>
+    <string name="txtTipoCodigoEmail">Email</string>
+    <string name="txtTipoCodigoTelf">Teléfono</string>
+    <string name="txtTipoCodigoGeo">Geolocalización</string>
+    <string name="menu_guardar">Guardar</string>
+    <string name="menu_compartir">Compartir</string>
+    <string name="menu_borrar">Descartar</string>
     <!-- Fin Pantalla QRCreator-->
+
+    <!--Pantalla Lista QR-->
+    <string name="titPantallaListaQR">Lista QR</string>
+    <string name="txtListaVacia">Actualmente no tienes guardado ningún CódigoQR</string>
+    <string name="errorEliminarCodigo">Error, no se ha podido eliminar el CódigoQR</string>
+    <string name="errorMostrarCodigo">Error, no se ha podido cargar este CodigoQR</string>
+    <!--Fin Pantalla Lista QR-->
+
+    <!-- Pantalla CodigoQR-->
+    <string name="titPantallaCodigo">CódigoQR</string>
+    <string name="txtNombreCodigo">Nombre:</string>
+    <string name="txtTipoCodigo">Tipo:</string>
+    <string name="txtFechaCodigo">Fecha:</string>
+    <string name="errorCompartirCodigoQR_2">Error Compartir, No se ha podido obtener la imagen del CódigoQR</string>
+    <!-- Fin Pantalla CodigoQR-->
 
 
 </resources>

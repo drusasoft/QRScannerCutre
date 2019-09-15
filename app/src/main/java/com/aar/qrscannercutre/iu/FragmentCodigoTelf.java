@@ -18,34 +18,26 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-
-
-public class FragmentCodigoUrl extends Fragment
+public class FragmentCodigoTelf extends Fragment
 {
 
-    @Nullable @BindView(R.id.titCodigoUrl) TextView titCodigoUrl;
-    @Nullable @BindView(R.id.editText_Url)  TextInputEditText editTexUrl;
-    @Nullable @BindView(R.id.btnCrearCodigoUrl) MaterialButton btnCrearCodigoUrl;
+    @Nullable @BindView(R.id.titCodigoTelf) TextView titCodigoTelf;
+    @Nullable @BindView(R.id.editTextTelf) TextInputEditText editTextTelf;
+    @Nullable @BindView(R.id.btnCrearCodigoTelf) MaterialButton btnCrearCodigoTelf;
 
     private Unbinder unbinder;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
 
-        View viewRoot = inflater.inflate(R.layout.layout_fragment_codigo_url, container, false);
+        View viewRoot = inflater.inflate(R.layout.layout_fragment_codigo_telf, container, false);
         unbinder = ButterKnife.bind(this, viewRoot);
 
         Typeface fuente_sabo_regular = Typeface.createFromAsset(getContext().getAssets(), "fonts/sabo_regular.otf");
-        titCodigoUrl.setTypeface(fuente_sabo_regular);
-        btnCrearCodigoUrl.setTypeface(fuente_sabo_regular);
+        titCodigoTelf.setTypeface(fuente_sabo_regular);
+        btnCrearCodigoTelf.setTypeface(fuente_sabo_regular);
 
         return viewRoot;
     }
@@ -61,20 +53,23 @@ public class FragmentCodigoUrl extends Fragment
     }
 
 
-    @OnClick(R.id.btnCrearCodigoUrl)
-    public void crearCodigoUrl()
+   @OnClick(R.id.btnCrearCodigoTelf)
+    public void crearCodigoTelf()
     {
-        String url = editTexUrl.getText().toString().trim();
 
-        if(url.length()>0)
+        String telf = editTextTelf.getText().toString().trim();
+
+        if(telf.length()>0)
         {
-            ((PantallaQRCreator) getActivity()).crearCodigoQR(url);
+            String datosCodigo = "tel:"+telf;
+
+            ((PantallaQRCreator) getActivity()).crearCodigoQR(datosCodigo);
+
         }else
         {
-            Toast.makeText(getContext(),R.string.errorUrlCodigoQR, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.errorTelfCodigoQR, Toast.LENGTH_LONG).show();
         }
 
     }
-
 
 }

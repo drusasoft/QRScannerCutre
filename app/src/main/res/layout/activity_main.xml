@@ -164,4 +164,17 @@
         app:layout_anchorGravity="right"/>
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingBtnLista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="100dp"
+        app:rippleColor="@color/colorNegro"
+        app:srcCompat="@mipmap/ic_qr_list"
+        app:layout_anchor="@id/toolbarMain"
+        app:layout_anchorGravity="right"/>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

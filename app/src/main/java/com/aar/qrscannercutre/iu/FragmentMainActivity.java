@@ -11,6 +11,8 @@ import com.aar.qrscannercutre.R;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+
+
 public class FragmentMainActivity extends Fragment
 {
 
@@ -20,6 +22,7 @@ public class FragmentMainActivity extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
 
     @Nullable
     @Override
@@ -32,6 +35,7 @@ public class FragmentMainActivity extends Fragment
 
         return viewRoot;
     }
+
 
     @Override
     public void onDestroy()

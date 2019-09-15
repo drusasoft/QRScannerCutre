@@ -3,14 +3,14 @@
 
     <item android:id="@+id/menu_qr_guadar"
         android:icon="@android:drawable/ic_menu_save"
-        android:title="Guardar"/>
+        android:title="@string/menu_guardar"/>
 
     <item android:id="@+id/menu_qr_compartir"
         android:icon="@android:drawable/ic_menu_share"
-        android:title="Compartir"/>
+        android:title="@string/menu_compartir"/>
 
     <item android:id="@+id/menu_qr_borrar"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="Descartar"/>
+        android:title="@string/menu_borrar"/>
 
 </menu>

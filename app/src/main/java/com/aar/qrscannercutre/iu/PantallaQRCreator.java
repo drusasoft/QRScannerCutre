@@ -2,6 +2,8 @@ package com.aar.qrscannercutre.iu;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
@@ -11,14 +13,13 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.FragmentManager;
-
 import com.aar.qrscannercutre.QRScannerCutre;
 import com.aar.qrscannercutre.R;
 import com.aar.qrscannercutre.presentador.PresentadorPantallaQRCreator;
@@ -29,14 +30,18 @@ import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+
 
 public class PantallaQRCreator extends AppCompatActivity implements VistaPantallaQRCreator
 {
 
     @BindView(R.id.layoutParentQRCreator) CoordinatorLayout layoutParent;
+    @BindView(R.id.layoutTipoCodigo) LinearLayout layoutTipoCodigo;
     @BindView(R.id.layoutContenedorFragments) FrameLayout layoutContenedorFragments;
     @BindView(R.id.toolbarPantallaCreator) BottomAppBar toolbar;
     @BindView(R.id.titBootomBarPantallaCreator) TextView titToolbarCreator;
@@ -46,6 +51,13 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
     @BindView(R.id.chipTexto) Chip chipTexto;
     @BindView(R.id.chipUrl) Chip chipUrl;
 
+    @BindString(R.string.txtTipoCodigoTexto) String txtTipoCodigoTexto;
+    @BindString(R.string.txtTipoCodigoUrl) String txtTipoCodigoUrl;
+    @BindString(R.string.txtTipoCodigoSms) String txtTipoCodigoSms;
+    @BindString(R.string.txtTipoCodigoEmail) String txtTipoCodigoEmail;
+    @BindString(R.string.txtTipoCodigoTelf) String txtTipoCodigoTelf;
+    @BindString(R.string.txtTipoCodigoGeo) String txtTipoCodigoGeo;
+
     private PresentadorPantallaQRCreator presentadorPantallaQRCreator;
 
     private AnimationDrawable animacionFondo;
@@ -53,12 +65,16 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
 
     private Bitmap codigoBmp;
     private String tipoCodigoSelecc = "";
+    private String tipoCodigo = "";
+
+    private int SELECC_COORD = 100;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_pantalla_qrcreator);
+        setContentView(R.layout.activity_pantalla_qrcreator);
         ButterKnife.bind(this);
 
         //Muestra en Pantalla Completa
@@ -102,16 +118,28 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
                 switch (checkedId)
                 {
                     case R.id.chipTexto: tipoCodigoSelecc = "texto";
+                                         tipoCodigo = txtTipoCodigoTexto;
                                          break;
 
                     case R.id.chipUrl:  tipoCodigoSelecc = "url";
+                                        tipoCodigo = txtTipoCodigoUrl;
                                         break;
 
                     case R.id.chipSms:  tipoCodigoSelecc = "sms";
+                                        tipoCodigo = txtTipoCodigoSms;
                                         break;
 
                     case R.id.chipEmail:  tipoCodigoSelecc = "email";
+                                          tipoCodigo = txtTipoCodigoEmail;
                                           break;
+
+                    case R.id.chipLlamada:  tipoCodigoSelecc = "telf";
+                                            tipoCodigo = txtTipoCodigoTelf;
+                                            break;
+
+                    case R.id.chipGeo:  tipoCodigoSelecc = "geo";
+                                        tipoCodigo = txtTipoCodigoGeo;
+                                        break;
 
                     case -1: //Cuando se deselecciona una opcion ya seleccionada la variable checkedId = -1
                              tipoCodigoSelecc = "ninguno";
@@ -126,9 +154,6 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
             }
 
         });
-
-        //Esto es de prueba
-        qrScannerCutre.getDataManagerDataBase().getCodigos();
 
     }
 
@@ -150,9 +175,10 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
         super.onResume();
 
         //Se inicia de nuevo la animacion de fondo
-        if(animacionIniciada && animacionFondo.isRunning())
+        if(animacionIniciada && !animacionFondo.isRunning())
             animacion_fondo();
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -164,6 +190,27 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
         }
 
         return true;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == SELECC_COORD && resultCode == RESULT_OK)
+        {
+
+            double lat = data.getDoubleExtra("latitud", 0);
+            double lng = data.getDoubleExtra("longitud", 0);
+
+            FragmentCodigoGeo fragmentCodigoGeo = (FragmentCodigoGeo) getSupportFragmentManager().findFragmentByTag("Fragment_CodigoGeo");
+
+            if(fragmentCodigoGeo != null)
+                fragmentCodigoGeo.setLatLng(String.valueOf(lat), String.valueOf(lng));
+
+        }
+
     }
 
 
@@ -243,8 +290,7 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
 
                 if(nombreCodigo.length()>0)
                 {
-                    presentadorPantallaQRCreator.guardarCodigoQR(nombreCodigo, codigoBmp, tipoCodigoSelecc);
-
+                    presentadorPantallaQRCreator.guardarCodigoQR(nombreCodigo, codigoBmp, tipoCodigo);
                     dialog.dismiss();
                 }else
                 {
@@ -270,6 +316,14 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
     public Bitmap getCodigoBmp()
     {
         return codigoBmp;
+    }
+
+
+    //Este metodo es llamado desde el FragmentCodigoGeo para ir a la pantalla mapa y seleecionar unas coordenadas
+    public void irPantallaMapa()
+    {
+        Intent intent = new Intent(this, PantallaSeleccionarPosicion.class);
+        startActivityForResult(intent,  SELECC_COORD, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
 
@@ -343,6 +397,40 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
         }
 
 
+        if(tipoCodigoSelecc.equals("telf"))
+        {
+
+            FragmentCodigoTelf fragmentCodigoTelf = new FragmentCodigoTelf();
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.layoutContenedorFragments, fragmentCodigoTelf, "Fragment_CodigoTelf")
+                    .commit();
+
+            efecto_mostrar_circular(layoutContenedorFragments);
+
+            return;
+
+        }
+
+
+        if(tipoCodigoSelecc.equals("geo"))
+        {
+
+            FragmentCodigoGeo fragmentCodigoGeo = new FragmentCodigoGeo();
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.layoutContenedorFragments, fragmentCodigoGeo, "Fragment_CodigoGeo")
+                    .commit();
+
+            efecto_mostrar_circular(layoutContenedorFragments);
+
+            return;
+
+        }
+
+
     }
 
 
@@ -384,8 +472,15 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
             public void onAnimationEnd(Animator animation)
             {
                 super.onAnimationEnd(animation);
-                floatingBtnBack.show();
+
+                if(view == toolbar)
+                    efecto_mostrar_circular(layoutTipoCodigo);
+
+                if(view == layoutTipoCodigo)
+                    floatingBtnBack.show();
+
             }
+
         });
 
         view.setVisibility(View.VISIBLE);

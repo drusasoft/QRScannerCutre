@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import com.aar.qrscannercutre.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

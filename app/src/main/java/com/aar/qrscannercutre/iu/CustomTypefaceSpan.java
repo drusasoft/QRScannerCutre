@@ -8,7 +8,7 @@ import android.text.style.TypefaceSpan;
 /**
  * Created by Angel on 09/05/2016.
  */
-//Clase creada pata cambiar la Fuente de los elementos del NavigationDrawer
+//Clase creada pata cambiar la Fuente de los elementos del NavigationDrawer y de los menus
 public class CustomTypefaceSpan extends TypefaceSpan {
 
     private final Typeface newType;

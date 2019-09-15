@@ -55,6 +55,9 @@
         <activity android:name=".iu.PantallaInfo" android:screenOrientation="portrait" android:label="@string/titPantallaInfo"/>
         <activity android:name=".iu.PantallaMapa" android:screenOrientation="portrait"/>
         <activity android:name=".iu.PantallaQRCreator" android:screenOrientation="portrait" android:label="@string/titPantallaQrCreator"/>
+        <activity android:name=".iu.PantallaListaQR" android:screenOrientation="portrait" android:label="@string/titPantallaListaQR"/>
+        <activity android:name=".iu.PantallaCodigoQR" android:screenOrientation="portrait" android:label=""/>
+        <activity android:name=".iu.PantallaSeleccionarPosicion" android:screenOrientation="portrait" android:label="@string/titPantallaSelecPosicion"/>
 
     </application>
 

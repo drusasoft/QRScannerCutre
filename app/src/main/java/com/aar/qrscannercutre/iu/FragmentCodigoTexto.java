@@ -18,19 +18,24 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+
+
 public class FragmentCodigoTexto extends Fragment
 {
 
     @Nullable @BindView(R.id.editText_texto) TextInputEditText editTexto;
     @Nullable @BindView(R.id.titCodigoTexto) TextView titCodigoTexto;
     @Nullable @BindView(R.id.btnCrearCodigoTexto) MaterialButton btnCrearCodigoTexto;
+
     private Unbinder unbinder;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
     }
+
 
     @Nullable
     @Override
@@ -48,6 +53,7 @@ public class FragmentCodigoTexto extends Fragment
 
     }
 
+
     @Override
     public void onDestroy()
     {
@@ -56,6 +62,7 @@ public class FragmentCodigoTexto extends Fragment
         if(unbinder != null)
             unbinder.unbind();
     }
+
 
     @OnClick(R.id.btnCrearCodigoTexto)
     public void crearCodigoTexto()
@@ -71,4 +78,5 @@ public class FragmentCodigoTexto extends Fragment
         }
 
     }
+
 }

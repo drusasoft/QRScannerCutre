@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutParentPantallaLista"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardInfoListaVacia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="top"
+        android:alpha=".7"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorNegro"
+            android:textStyle="bold"
+            android:text="@string/txtListaVacia"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerQR"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="60dp"/>
+
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/toolbarPantallaLista"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:visibility="invisible"
+        android:theme="@style/AppTheme.toolbarStyle"
+        app:backgroundTint="@color/colorNegro"
+        app:titleTextAppearance="@style/AppTheme.toolBarTextStyle"
+        app:fabAlignmentMode="end"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="6dp">
+
+        <TextView
+            android:id="@+id/titPantallaLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/titPantallaListaQR"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/colorAmarillo"/>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingBtnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:tag="btnBack"
+        app:rippleColor="@color/colorNegro"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        app:layout_anchor="@id/toolbarPantallaLista"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

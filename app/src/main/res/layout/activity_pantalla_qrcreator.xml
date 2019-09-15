@@ -18,13 +18,15 @@
 
 
         <LinearLayout
+            android:id="@+id/layoutTipoCodigo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/textura_transparente"
             android:layout_marginTop="25dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="15dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="invisible">
 
             <TextView
                 android:id="@+id/titTipoCodigoQR"

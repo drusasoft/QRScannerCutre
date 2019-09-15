@@ -28,6 +28,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+
+
 public class FragmentQRScanner extends Fragment implements SurfaceHolder.Callback
 {
 

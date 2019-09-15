@@ -22,6 +22,7 @@ import android.provider.Telephony;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -42,6 +43,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
+
 public class MainActivity extends AppCompatActivity implements VistaMainActivity
 {
 
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     @BindView(R.id.titBootomBar) TextView textViewTitulo;
     @BindView(R.id.floatingBtnShowScanner) FloatingActionButton floatingBtnScanner;
     @BindView(R.id.floatingBtnCreate) FloatingActionButton floatingBtnCreate;
+    @BindView(R.id.floatingBtnLista) FloatingActionButton floatingBtnLista;
     @BindView(R.id.layoutParentMain) CoordinatorLayout layoutParentMain;
     @BindView(R.id.layoutContenedorFragments) FrameLayout layoutContenedorFragments;
     @BindView(R.id.layoutBtnScanner) LinearLayout layoutBtnScanner;
@@ -214,6 +218,15 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
+    @OnClick(R.id.btnScanner)
+    public void scanearCodigo()
+    {
+        imgLuzScanner.setImageResource(R.drawable.led_black);
+        textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR);
+        fragmentQRScanner.iniciarCaptura();
+    }
+
+
     @OnClick(R.id.floatingBtnCreate)
     public void irPantallaQRCreator()
     {
@@ -225,21 +238,20 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
-    @OnClick(R.id.btnScanner)
-    public void scanearCodigo()
-    {
-        imgLuzScanner.setImageResource(R.drawable.led_black);
-        textViewTipoCodigoQR.setText(R.string.txtTipoCodigoQR);
-        fragmentQRScanner.iniciarCaptura();
-    }
-
-
     @OnClick(R.id.imgInfo)
     public void irPntallaInfo()
     {
         Intent intent = new Intent(this, PantallaInfo.class);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, imgInfo, "imgInfo");
         startActivity(intent, options.toBundle());
+    }
+
+
+    @OnClick(R.id.floatingBtnLista)
+    public void irPantallaLista()
+    {
+        Intent intent = new Intent(this, PantallaListaQR.class);
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
 
@@ -641,6 +653,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     @Override
     public void lanzarWifi(Barcode barCode)
     {
+
         //Se obtiene los datos de la Wifi
         Barcode.WiFi wifiCode = barCode.wifi;
         String ssid = wifiCode.ssid;
@@ -657,18 +670,31 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
                  public void onClick(DialogInterface dialog, int which)
                  {
 
-                     WifiConfiguration wifiConfiguration = new WifiConfiguration();
-                     wifiConfiguration.SSID = String.format("\"%s\"", ssid);
-                     wifiConfiguration.preSharedKey = String.format("\"%s\"", password);
-
                      WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-                     wifiManager.addNetwork(wifiConfiguration);//Se añade la nueva red wifi
 
-                     Toast.makeText(getApplicationContext(), R.string.txtWifiOk, Toast.LENGTH_LONG).show();
+                     if(wifiManager.getWifiState() == WifiManager.WIFI_STATE_ENABLED)
+                     {
+                         WifiConfiguration wifiConfiguration = new WifiConfiguration();
+                         wifiConfiguration.SSID = String.format("\"%s\"", ssid);
+                         wifiConfiguration.preSharedKey = String.format("\"%s\"", password);
 
-                     //Se lanza la pantalla de configuracion de la wifi del telefono para que el usaurio pueda seleccionar la nueva wifi guardada
-                     Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
-                     startActivity(intent);
+                         int netId = wifiManager.addNetwork(wifiConfiguration);//Se añade la nueva red wifi
+
+                         //Se conecta a la wifi scaneada
+                         wifiManager.disconnect();
+                         wifiManager.enableNetwork(netId, true);
+                         wifiManager.reconnect();
+
+                         //Se lanza la pantalla de configuracion de la wifi del telefono para que el usaurio pueda seleccionar la nueva wifi guardada
+                         Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                         startActivity(intent);
+
+                         Toast.makeText(getApplicationContext(), R.string.txtWifiOk, Toast.LENGTH_LONG).show();
+
+                     }else
+                     {
+                         Toast.makeText(getApplicationContext(), R.string.txtErrorWifi, Toast.LENGTH_LONG).show();
+                     }
 
                  }
 
@@ -709,6 +735,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
                     .commit();
 
             floatingBtnCreate.hide();
+            floatingBtnLista.hide();
 
         }else
         {
@@ -724,6 +751,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
             fragmentQRScanner.liberarRecursos();
             floatingBtnCreate.show();
+            floatingBtnLista.show();
 
         }
 
@@ -779,6 +807,42 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
+    private void efecto_translate()
+    {
+        //Animacion translate para el boton ir a la seccion QRCreator
+        TranslateAnimation translateAnimation1 = new TranslateAnimation(0.0f, 0.0f,145.0f,0.0f);
+        translateAnimation1.setDuration(1000);
+        translateAnimation1.setStartOffset(500);
+        floatingBtnCreate.startAnimation(translateAnimation1);
+
+        translateAnimation1.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation)
+            {
+
+                floatingBtnLista.show();
+
+                //Animacion para el boton ir a la pantalla de CodigosQR guardados
+                TranslateAnimation translateAnimation2 = new TranslateAnimation(140.0f, 0.0f, 0.0f, 0.0f);
+                translateAnimation2.setDuration(1000);
+                translateAnimation2.setStartOffset(800);
+
+                floatingBtnLista.startAnimation(translateAnimation2);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+    }
+
 
     private void efecto_mostrar_circular(View view)
     {
@@ -793,47 +857,30 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
         Animator anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0, finalRadious);
         anim.setDuration(1000);//Establezco una duracion mayor al la animacion para ver mejor el efecto
 
-
-        if(view == layoutContenedorFragments)
+        anim.addListener(new AnimatorListenerAdapter()
         {
-            anim.addListener(new AnimatorListenerAdapter()
+            @Override
+            public void onAnimationEnd(Animator animation)
             {
-                @Override
-                public void onAnimationEnd(Animator animation)
-                {
+                super.onAnimationEnd(animation);
+
+                if(view == layoutContenedorFragments)
                     efecto_mostrar_circular(bottomAppBar);
-                }
-            });
-        }
 
-
-        if(view == bottomAppBar)
-        {
-            anim.addListener(new AnimatorListenerAdapter()
-            {
-                public void onAnimationEnd(Animator animation)
+                if(view == bottomAppBar)
                 {
                     floatingBtnScanner.show();
                     floatingBtnCreate.show();
                     efecto_translate();
                 }
-            });
-        }
+            }
+
+        });
 
         // make the view visible and start the animation
         view.setVisibility(View.VISIBLE);
         anim.start();
 
-    }
-
-
-    private void efecto_translate()
-    {
-        TranslateAnimation translateAnimation = new TranslateAnimation(0.0f, 0.0f,145.0f,0.0f);
-        translateAnimation.setDuration(1000);
-        translateAnimation.setStartOffset(500);
-
-        floatingBtnCreate.startAnimation(translateAnimation);
     }
 
 

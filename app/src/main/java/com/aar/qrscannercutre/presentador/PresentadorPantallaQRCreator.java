@@ -6,21 +6,20 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
-
 import com.aar.qrscannercutre.R;
 import com.aar.qrscannercutre.iu.VistaBase;
 import com.aar.qrscannercutre.iu.VistaPantallaQRCreator;
 import com.aar.qrscannercutre.modelo.DataManagerCreadorCodigos;
 import com.aar.qrscannercutre.modelo.DataManagerDataBase;
 import com.aar.qrscannercutre.pojos.Codigo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
-
 import static androidx.core.content.FileProvider.getUriForFile;
+
+
 
 public class PresentadorPantallaQRCreator implements PresentadorMVPPantallaQRCreator
 {
@@ -70,6 +69,7 @@ public class PresentadorPantallaQRCreator implements PresentadorMVPPantallaQRCre
 
             if(codigoBmp != null)
             {
+
                 try
                 {
                     //Se crea el directorio y el fichero donde se va a guardar la imagen del codigo QR que se va ha compartir
@@ -110,6 +110,7 @@ public class PresentadorPantallaQRCreator implements PresentadorMVPPantallaQRCre
         {
             Toast.makeText(context, R.string.errorAccesoTarjetaSD, Toast.LENGTH_LONG).show();
         }
+
     }
 
 
@@ -129,8 +130,9 @@ public class PresentadorPantallaQRCreator implements PresentadorMVPPantallaQRCre
                 int mes = calendar.get(Calendar.MONTH)+1;
                 int año = calendar.get(Calendar.YEAR);
 
+                String timesMilles = String.valueOf(System.currentTimeMillis());
                 String fecha = dia+"-"+mes+"-"+año;
-                String nombreCodigoFile = nombre+"_"+System.currentTimeMillis()+".png";
+                String nombreCodigoFile = nombre+"_"+timesMilles+".png";
 
                 File fileDir = new File(Environment.getExternalStorageDirectory(),"QRScanner");
                 File fileCodigoQR = new File (fileDir, nombreCodigoFile);
@@ -146,14 +148,20 @@ public class PresentadorPantallaQRCreator implements PresentadorMVPPantallaQRCre
                 fos.close();
 
                 //Se guardan los datos del codigoQR en la BD
-                Codigo codigo = new Codigo(nombre, nombreCodigoFile, tipo, fileCodigoQR.getPath(), fecha);
+                Codigo codigo = new Codigo(nombre, nombreCodigoFile, tipo, fileCodigoQR.getPath(), fecha, timesMilles);
                 dataManagerDataBase.addCodigo(codigo);
+
+                Toast.makeText(context, R.string.txtGuardadoOK, Toast.LENGTH_LONG).show();
 
             } catch (FileNotFoundException e)
             {
                 Toast.makeText(context, R.string.errorGuardarCodigoQR, Toast.LENGTH_LONG).show();
 
             } catch (IOException e)
+            {
+                Toast.makeText(context, R.string.errorGuardarCodigoQR, Toast.LENGTH_LONG).show();
+
+            }catch (Exception e)
             {
                 Toast.makeText(context, R.string.errorGuardarCodigoQR, Toast.LENGTH_LONG).show();
             }
@@ -163,7 +171,6 @@ public class PresentadorPantallaQRCreator implements PresentadorMVPPantallaQRCre
         {
             Toast.makeText(context, R.string.errorAccesoTarjetaSD, Toast.LENGTH_LONG).show();
         }
-
 
     }
 

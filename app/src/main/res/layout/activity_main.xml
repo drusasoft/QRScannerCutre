@@ -83,7 +83,7 @@
                     app:icon="@mipmap/ic_qr"
                     app:iconTint="@color/colorAmarillo"
                     app:rippleColor="@color/colorAmarillo"
-                    app:strokeColor="@color/colorAmarillo"/>
+                    app:strokeColor="@color/colorAmarillo" />
 
 
             </LinearLayout>

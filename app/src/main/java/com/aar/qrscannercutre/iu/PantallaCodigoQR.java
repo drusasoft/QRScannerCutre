@@ -127,8 +127,7 @@ public class PantallaCodigoQR extends AppCompatActivity
                     //y el archivo xml provider_paths donde se establece la ruta, ya que si no se produce la Excepcion FileUriExposedException
                     Uri contentUri = getUriForFile(getApplicationContext(), "com.aar.qrscannercutre.fileprovider", fileCodigoQR);
 
-                    Intent shareIntent = new Intent();
-                    shareIntent.setAction(Intent.ACTION_SEND);
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
                     shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
                     shareIntent.setType("image/png");
                     startActivity(shareIntent);
@@ -139,6 +138,10 @@ public class PantallaCodigoQR extends AppCompatActivity
 
                 } catch (IOException e) {
                     Toast.makeText(getApplicationContext(), R.string.errorCompartirCodigoQR, Toast.LENGTH_LONG).show();
+
+                }catch (Exception e)
+                {
+                    Toast.makeText(getApplicationContext(), R.string.errorCompartirCodigoQR_3, Toast.LENGTH_LONG).show();
                 }
 
             }else

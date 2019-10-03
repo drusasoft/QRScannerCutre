@@ -54,7 +54,6 @@ public class PantallaMapa extends AppCompatActivity
     private String direccion;
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {

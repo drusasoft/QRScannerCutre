@@ -101,6 +101,9 @@ public class PresentadorPantallaQRCreator implements PresentadorMVPPantallaQRCre
                     Toast.makeText(context, R.string.errorCompartirCodigoQR, Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     Toast.makeText(context, R.string.errorCompartirCodigoQR, Toast.LENGTH_LONG).show();
+                }catch (Exception e)
+                {
+                    Toast.makeText(context, R.string.errorCompartirCodigoQR_3, Toast.LENGTH_LONG).show();
                 }
 
             }

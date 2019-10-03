@@ -34,6 +34,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="@string/hintTextoCodigoQR"
+        app:hintTextColor="@color/color_texto_hint"
+        android:textColorHint="@color/color_texto_hint_2"
         app:boxStrokeColor="@color/color_text_input">
 
         <com.google.android.material.textfield.TextInputEditText

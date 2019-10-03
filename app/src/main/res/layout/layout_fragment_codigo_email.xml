@@ -34,6 +34,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="@string/hintEmailCodigoQR_1"
+        android:textColorHint="@color/color_texto_hint_2"
+        app:hintTextColor="@color/color_texto_hint"
         app:boxStrokeColor="@color/color_text_input">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -57,6 +59,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="@string/hintEmailCodigoQR_2"
+        android:textColorHint="@color/color_texto_hint_2"
+        app:hintTextColor="@color/color_texto_hint"
         app:boxStrokeColor="@color/color_text_input">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -80,6 +84,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="@string/hintEmailCodigoQR_3"
+        android:textColorHint="@color/color_texto_hint_2"
+        app:hintTextColor="@color/color_texto_hint"
         app:boxStrokeColor="@color/color_text_input">
 
         <com.google.android.material.textfield.TextInputEditText

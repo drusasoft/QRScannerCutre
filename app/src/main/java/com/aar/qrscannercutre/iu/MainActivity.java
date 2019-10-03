@@ -134,17 +134,15 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
-
     @Override
-    protected void onPause()
+    protected void onStop()
     {
-        super.onPause();
+        super.onStop();
 
         //Se para la animacion de fondo
         if(animacionFondoIniciada && animacionFondo.isRunning())
             animacionFondo.stop();
     }
-
 
 
     @Override
@@ -156,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
         if(animacionFondoIniciada && !animacionFondo.isRunning())
             animacionFondo.start();
     }
-
 
 
     @Override
@@ -177,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
             Toast.makeText(this, R.string.txtPermiso2, Toast.LENGTH_LONG).show();
         }
     }
-
 
 
     @OnClick(R.id.floatingBtnShowScanner)
@@ -318,7 +314,6 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
-
     @Override
     //Se le pregunta al usuario si quiere acceder a la URL escaneada
     public void lanzarURL(Barcode barCode)
@@ -371,6 +366,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
 
     }
+
 
     @Override
     //Se le pregunta al usuario si quiere acceder a la URL escaneada
@@ -455,7 +451,6 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
-
     @Override
     //Se le pregunta al usuario si quiere enviar el SMS escaneado
     public void lanzarSms(Barcode barCode)
@@ -508,7 +503,6 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
-
     @Override
     //Se le pregunta al usuario si quiere enviar el Email escaneado
     public void lanzarEmail(Barcode barCode)
@@ -555,7 +549,6 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
         });
 
     }
-
 
 
     @Override
@@ -625,7 +618,6 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
-
     @Override
     public void lanzarTexto(Barcode barCode)
     {
@@ -647,7 +639,6 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
             }
         });
     }
-
 
 
     @Override
@@ -712,11 +703,10 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
     }
 
+
     //**********************************************************************************************
         //Fin Metodos que llaman al Presentador y que son llamados desde el Presentador
     //**********************************************************************************************
-
-
 
     //Este metooo carga el fragment que corresponda en el layout, dicha caarga se realiza mostrando la animacion cardflip
     private void cargarFragment()
@@ -758,7 +748,6 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
-
     //Se comprueba si el usuario ha dado permiso para usar la camara y si no se solicita
     private boolean comprobarPermisoCamara()
     {
@@ -788,7 +777,6 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     }
 
 
-
     //Se inicia la animacion (AnimationDrawable) de la imagen de fondo de la pantalla principal
     private void animacion_fondo() {
 
@@ -811,11 +799,12 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
     {
         //Animacion translate para el boton ir a la seccion QRCreator
         TranslateAnimation translateAnimation1 = new TranslateAnimation(0.0f, 0.0f,145.0f,0.0f);
-        translateAnimation1.setDuration(1000);
+        translateAnimation1.setDuration(800);
         translateAnimation1.setStartOffset(500);
         floatingBtnCreate.startAnimation(translateAnimation1);
 
-        translateAnimation1.setAnimationListener(new Animation.AnimationListener() {
+        translateAnimation1.setAnimationListener(new Animation.AnimationListener()
+        {
             @Override
             public void onAnimationStart(Animation animation) {
 
@@ -829,8 +818,8 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
 
                 //Animacion para el boton ir a la pantalla de CodigosQR guardados
                 TranslateAnimation translateAnimation2 = new TranslateAnimation(140.0f, 0.0f, 0.0f, 0.0f);
-                translateAnimation2.setDuration(1000);
-                translateAnimation2.setStartOffset(800);
+                translateAnimation2.setDuration(800);
+                translateAnimation2.setStartOffset(500);
 
                 floatingBtnLista.startAnimation(translateAnimation2);
             }
@@ -839,6 +828,7 @@ public class MainActivity extends AppCompatActivity implements VistaMainActivity
             public void onAnimationRepeat(Animation animation) {
 
             }
+
         });
 
     }

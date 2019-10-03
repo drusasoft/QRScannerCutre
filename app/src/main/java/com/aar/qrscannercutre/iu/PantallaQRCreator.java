@@ -159,9 +159,9 @@ public class PantallaQRCreator extends AppCompatActivity implements VistaPantall
 
 
     @Override
-    protected void onPause()
+    protected void onStop()
     {
-        super.onPause();
+        super.onStop();
 
         //Se para la animacion de fondo
         if(animacionIniciada && animacionFondo.isRunning())

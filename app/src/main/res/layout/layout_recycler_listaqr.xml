@@ -56,17 +56,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/orbitron_bold"
                     android:lines="1"
                     android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textSize="25dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/color_texto_recycler"/>
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textColor="@color/color_texto_recycler"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtRecyclerTipoQR"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:fontFamily="@font/orbitron_bold"
                     android:layout_gravity="center_horizontal"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/color_texto_recycler"/>

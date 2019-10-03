@@ -90,14 +90,14 @@
     <string name="hintNombreCodigoQR">Nombre Código</string>
     <string name="hintTextoCodigoQR">Introduce Texto</string>
     <string name="hintUrlCodigoQR">Introduce Url</string>
-    <string name="hintSmsCodigoQR_1">Telefono</string>
-    <string name="hintSmsCodigoQR_2">Texto Mensaje</string>
+    <string name="hintSmsCodigoQR_1">Intoduce Teléfono</string>
+    <string name="hintSmsCodigoQR_2">Intoduce Texto</string>
     <string name="hintEmailCodigoQR_1">Para</string>
     <string name="hintEmailCodigoQR_2">Asunto</string>
-    <string name="hintEmailCodigoQR_3">Contenido</string>
-    <string name="hintTelfCodigoQR">Teléfono</string>
-    <string name="hintGeoCodigoQR_1">Latitud</string>
-    <string name="hintGeoCodigoQR_2">Longitud</string>
+    <string name="hintEmailCodigoQR_3">Intoduce Contenido</string>
+    <string name="hintTelfCodigoQR">Intoduce Teléfono</string>
+    <string name="hintGeoCodigoQR_1">Introduce Latitud</string>
+    <string name="hintGeoCodigoQR_2">Introduce Longitud</string>
     <string name="btnCrear">Crear</string>
     <string name="btnCerrar">Cerrar</string>
     <string name="txtGuardadoOK">El Código QR se ha guardado Correctamente</string>
@@ -126,8 +126,11 @@
     <!--Pantalla Lista QR-->
     <string name="titPantallaListaQR">Lista QR</string>
     <string name="txtListaVacia">Actualmente no tienes guardado ningún CódigoQR</string>
+    <string name="txtListaNoVacia">Los códigos QR se encuentran almacenados en una carpeta llamada QRScanner, dentro del sistema de archivos de tu dispositivo.</string>
     <string name="errorEliminarCodigo">Error, no se ha podido eliminar el CódigoQR</string>
     <string name="errorMostrarCodigo">Error, no se ha podido cargar este CodigoQR</string>
+    <string name="titDialogEliminar">Borrar...</string>
+    <string name="txtDialogEliminar">¿Quieres eliminar los códigos QR seleccionados?</string>
     <!--Fin Pantalla Lista QR-->
 
     <!-- Pantalla CodigoQR-->
@@ -136,6 +139,7 @@
     <string name="txtTipoCodigo">Tipo:</string>
     <string name="txtFechaCodigo">Fecha:</string>
     <string name="errorCompartirCodigoQR_2">Error Compartir, No se ha podido obtener la imagen del CódigoQR</string>
+    <string name="errorCompartirCodigoQR_3">Error, No es posible compartir el Código QR</string>
     <!-- Fin Pantalla CodigoQR-->
 
 

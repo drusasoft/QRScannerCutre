@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
@@ -28,6 +29,7 @@ import com.aar.qrscannercutre.pojos.Codigo;
 import com.aar.qrscannercutre.presentador.PresentadorPantallaListaQR;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +38,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
+
 public class PantallaListaQR extends AppCompatActivity implements VistaPantallaListaQR
 {
 
     @BindView(R.id.layoutParentPantallaLista) CoordinatorLayout layoutParentPantalla;
     @BindView(R.id.cardInfoListaVacia) MaterialCardView cardInfoListaVacia;
+    @BindView(R.id.cardInfoCodigos) MaterialCardView cardInfoCodigos;
     @BindView(R.id.toolbarPantallaLista) BottomAppBar toolbarPantallaLista;
     @BindView(R.id.titPantallaLista) TextView titPantallaLista;
     @BindView(R.id.floatingBtnBack) FloatingActionButton btnBack;
@@ -214,14 +219,14 @@ public class PantallaListaQR extends AppCompatActivity implements VistaPantallaL
 
 
     @OnClick(R.id.floatingBtnBack)
-    public void  clicBtnVolver()
+    public void clicBtnVolver()
     {
         if(btnBack.getTag().equals("btnBack"))
         {
             onBackPressed();
         }else
         {
-            presentadorPantallaListaQR.eliminarCodigosQR(listaCodigosSelec);
+            mostrarDialogEliminar();
         }
     }
 
@@ -241,13 +246,66 @@ public class PantallaListaQR extends AppCompatActivity implements VistaPantallaL
         arqr.notifyDataSetChanged();
 
         if(listaCodigos.size()==0)
+        {
+            cardInfoCodigos.setVisibility(View.GONE);
             efecto_mostrar_circular(cardInfoListaVacia);
+        }
+        else
+        {
+            cardInfoListaVacia.setVisibility(View.GONE);
+            cardInfoCodigos.setVisibility(View.VISIBLE);
+        }
+
     }
 
 
     @Override
     public void mostrarMensajeError(int textError) {
         Toast.makeText(this, textError, Toast.LENGTH_LONG).show();
+    }
+
+
+    //Cuadro de dialogo que pregunta si se quieren borrar los codigos seleccionados
+    private void mostrarDialogEliminar()
+    {
+
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_MaterialComponents_MaterialAlertDialog_Centered)
+                .setTitle(R.string.titDialogEliminar)
+                .setMessage(R.string.txtDialogEliminar);
+
+        builder.setNegativeButton(R.string.btnNo, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //Se borra la lista de codigos seleccionados
+                listaCodigosSelec.clear();
+                btnBack.setTag("btnBack");
+                btnBack.setImageResource(android.R.drawable.ic_menu_revert);
+                titPantallaLista.setText(txtTituloPantalla);
+
+                //Se marcan como deseleccionados todos los codigos de la lista
+                for(Codigo codigo:listaCodigos)
+                    codigo.setSeleccionado(false);
+
+                //Se muestran los cambios en el recycler
+                arqr.notifyDataSetChanged();
+            }
+        });
+
+        builder.setPositiveButton(R.string.btnSi, new DialogInterface.OnClickListener()
+        {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //Se eliminan los codigos seleccionados
+                presentadorPantallaListaQR.eliminarCodigosQR(listaCodigosSelec);
+            }
+
+        });
+
+        builder.create().show();
+
     }
 
 

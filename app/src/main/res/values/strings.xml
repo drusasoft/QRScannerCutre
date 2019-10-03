@@ -90,14 +90,14 @@
     <string name="hintNombreCodigoQR">Code Name</string>
     <string name="hintTextoCodigoQR">Enter Text</string>
     <string name="hintUrlCodigoQR">Enter Url</string>
-    <string name="hintSmsCodigoQR_1">Phone</string>
-    <string name="hintSmsCodigoQR_2">Text Message</string>
+    <string name="hintSmsCodigoQR_1">Enter Phone</string>
+    <string name="hintSmsCodigoQR_2">Enter Text</string>
     <string name="hintEmailCodigoQR_1">To</string>
     <string name="hintEmailCodigoQR_2">Subject</string>
-    <string name="hintEmailCodigoQR_3">Body</string>
-    <string name="hintTelfCodigoQR">Phone</string>
-    <string name="hintGeoCodigoQR_1">Latitude</string>
-    <string name="hintGeoCodigoQR_2">Longitude</string>
+    <string name="hintEmailCodigoQR_3">Enter Body</string>
+    <string name="hintTelfCodigoQR">Enter Phone</string>
+    <string name="hintGeoCodigoQR_1">Enter Latitude</string>
+    <string name="hintGeoCodigoQR_2">Enter Longitude</string>
     <string name="btnCrear">Create</string>
     <string name="btnCerrar">Close</string>
     <string name="txtGuardadoOK">The QR Code has been saved correctly</string>
@@ -126,8 +126,11 @@
     <!--Pantalla Lista QR-->
     <string name="titPantallaListaQR">QR List</string>
     <string name="txtListaVacia">You currently have no saved QR Code</string>
+    <string name="txtListaNoVacia">The QR codes are stored in a folder called QRScanner, within the file system of your device.</string>
     <string name="errorEliminarCodigo">Error, could not delete the QR Code</string>
     <string name="errorMostrarCodigo">Error, this CodeQR could not be loaded</string>
+    <string name="titDialogEliminar">Delete...</string>
+    <string name="txtDialogEliminar">Do you want to delete the selected QR codes?</string>
     <!--Fin Pantalla Lista QR-->
 
     <!-- Pantalla CodigoQR-->
@@ -136,6 +139,7 @@
     <string name="txtTipoCodigo">Type:</string>
     <string name="txtFechaCodigo">Date:</string>
     <string name="errorCompartirCodigoQR_2">Error Sharing, Could not get image from QR Code</string>
+    <string name="errorCompartirCodigoQR_3">Error, It is not possible to share the QR Code</string>
     <!-- Fin Pantalla CodigoQR-->
 
 

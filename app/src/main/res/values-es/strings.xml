@@ -68,6 +68,7 @@
     <string name="txtMenuMapa_2">Vista Hibrida</string>
     <string name="txtMenuMapa_3">Vista Satélite</string>
     <string name="txtMenuMapa_4">Vista Terreno</string>
+    <string name="txtInfoMapa">Para obtener las coordenadas, realiza una pulsación larga en el punto deseado</string>
     <!-- Fin Pantalla Mapa-->
 
 

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.aar.qrscannercutre.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,6 +45,7 @@ public class PantallaSeleccionarPosicion extends AppCompatActivity
 {
 
     @BindView(R.id.layoutParentPantallaSeleccionarPosicion) CoordinatorLayout layoutPantallaSeleccionarPosicion;
+    @BindView(R.id.cardInfoMapa) CardView cardInfoMapa;
     @BindView(R.id.bottomBarMapa) BottomAppBar bottomBar;
     @BindView(R.id.titPantallaMapaCoord) TextView titPantallaMapaCoord;
     @BindView(R.id.floatingBtnBack) FloatingActionButton btnBack;
@@ -249,7 +251,10 @@ public class PantallaSeleccionarPosicion extends AppCompatActivity
                 super.onAnimationEnd(animation);
 
                 if(view == layoutPantallaSeleccionarPosicion)
+                {
                     efecto_mostrar_circular(bottomBar);
+                    efecto_mostrar_circular(cardInfoMapa);
+                }
 
                 if(view == bottomBar)
                     btnBack.show();

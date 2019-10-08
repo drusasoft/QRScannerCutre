@@ -7,8 +7,8 @@ android {
         applicationId "com.aar.qrscannercutre"
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 10
-        versionName "2.004"
+        versionCode 11
+        versionName "2.005"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

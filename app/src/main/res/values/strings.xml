@@ -68,6 +68,7 @@
     <string name="txtMenuMapa_2">Hybrid View</string>
     <string name="txtMenuMapa_3">Satellite View</string>
     <string name="txtMenuMapa_4">Terrain View</string>
+    <string name="txtInfoMapa">To get the coordinates, long press on the desired point</string>
     <!-- Fin Pantalla Mapa-->
 
 

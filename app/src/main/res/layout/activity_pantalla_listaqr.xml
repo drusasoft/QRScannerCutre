@@ -30,6 +30,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:fontFamily="@font/orbitron_bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/colorNegro"
                 android:textStyle="bold"
@@ -57,6 +58,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:fontFamily="@font/orbitron_bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/colorNegro"
                 android:textStyle="bold"
@@ -75,8 +77,6 @@
 
 
     </RelativeLayout>
-
-
 
 
     <com.google.android.material.bottomappbar.BottomAppBar
